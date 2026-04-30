@@ -438,34 +438,58 @@ function observeReveal() {
 // ── Contact Form ──────────────────────────────────────────────
 
 function initContactForm() {
-  const form    = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    // Simple validation
-    const name    = document.getElementById('fname').value.trim();
-    const email   = document.getElementById('femail').value.trim();
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('femail').value.trim(); // assuming this field is phone
     const message = document.getElementById('fmessage').value.trim();
 
-    if (!name || !email || !message) {
+    if (!name || !phone || !message) {
       alert('Please fill in all fields before sending.');
       return;
     }
 
-    // Simulate form send
     const btn = form.querySelector('.btn-primary');
-    btn.textContent = 'Sending…';
-    btn.disabled    = true;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
 
-    setTimeout(() => {
-      success.hidden  = false;
+    try {
+      const response = await fetch('https://vercel-api-eight-orcin.vercel.app/book-ticket', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          number: phone,
+          message
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Submission failed');
+      }
+
+      success.hidden = false;
       form.reset();
+
+      setTimeout(() => {
+        success.hidden = true;
+      }, 5000);
+
+    } catch (err) {
+      alert(err.message || 'Something went wrong.');
+      console.error(err);
+    } finally {
       btn.textContent = 'Send Message';
-      btn.disabled    = false;
-      setTimeout(() => { success.hidden = true; }, 5000);
-    }, 900);
+      btn.disabled = false;
+    }
   });
 }
 
