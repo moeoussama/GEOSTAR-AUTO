@@ -139,15 +139,15 @@
           <span class="order-note-text" id="orderNoteText"></span>
         </div>
 
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpqbdqzk" method="POST"></form>
+            <form class="contact-form" id="contactForm" novalidate> </form>
           <div class="form-row">
             <div class="form-group">
               <label for="ffirstname" data-i18n="form.firstname.label">First Name</label>
-              <input type="text" id="ffirstname"  name="first_name" placeholder="Ahmed" data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
+              <input type="text" id="ffirstname"   placeholder="Ahmed" data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
             </div>
             <div class="form-group">
               <label for="flastname" data-i18n="form.lastname.label">Last Name</label>
-              <input type="text" id="flastname" name="last_name"  placeholder="Benali" data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
+              <input type="text" id="flastname"   placeholder="Benali" data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
             </div>
           </div>
           <div class="form-group">
@@ -178,7 +178,7 @@
           </div>
           <div class="form-group">
             <label for="fphone" data-i18n="form.phone.label">Phone Number</label>
-            <input type="tel" id="fphone"  name="phone"  placeholder="05XX XX XX XX" data-i18n-placeholder="form.phone.placeholder" autocomplete="tel" />
+            <input type="tel" id="fphone"    placeholder="05XX XX XX XX" data-i18n-placeholder="form.phone.placeholder" autocomplete="tel" />
           </div>
           <p class="form-success" id="formSuccess" hidden></p>
           <button type="submit" class="btn btn-primary full-width" data-i18n="form.submit">Send Message</button>
