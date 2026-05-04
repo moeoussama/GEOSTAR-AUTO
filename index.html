@@ -6,23 +6,25 @@
   <title>GEOSTAR — Premium Car Showroom</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#home" class="nav-logo">
-        <span class="logo-icon">◈</span>
-        <span>GEOSTAR </span>
+        <img src="logo3.png" alt="GEOSTAR" class="nav-logo-img" />
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#cars" class="nav-link">Cars</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#home"    class="nav-link active" data-i18n="nav.home">Home</a></li>
+        <li><a href="#cars"    class="nav-link"        data-i18n="nav.cars">Cars</a></li>
+        <li><a href="#contact" class="nav-link"        data-i18n="nav.contact">Contact</a></li>
       </ul>
       <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+          <span class="lang-icon">EN</span>
+        </button>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
           <span class="theme-icon">☽</span>
         </button>
@@ -33,162 +35,202 @@
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-bg">
       <div class="hero-grid-overlay"></div>
       <div class="hero-gradient"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow fade-up">Premium Automotive Experience</p>
-      <h1 class="hero-title fade-up delay-1">
-        Welcome to <br /><em> GEOSTAR Showroom</em>
-      </h1>
-      <p class="hero-sub fade-up delay-2">
-        Discover an exceptional collection of vehicles — from refined city cars
-        to commanding SUVs. Every model selected for those who demand the best.
+      <div class="hero-logo-wrap fade-up">
+        <img src="logo3.png" alt="GEOSTAR" class="hero-logo-img" />
+      </div>
+      <p class="hero-eyebrow fade-up delay-1" data-i18n="hero.eyebrow">Premium Automotive Experience</p>
+      <p class="hero-sub fade-up delay-2" data-i18n="hero.sub">
+        Discover an exceptional collection of vehicles — from refined city cars to commanding SUVs.
+        Every model selected for those who demand the best.
       </p>
       <div class="hero-cta fade-up delay-3">
-        <a href="#cars" class="btn btn-primary">Explore Fleet</a>
-        <a href="#contact" class="btn btn-ghost">Book a Visit</a>
+        <a href="#cars"    class="btn btn-primary" data-i18n="hero.cta.fleet">Explore Fleet</a>
+        <a href="#contact" class="btn btn-ghost"   data-i18n="hero.cta.visit">Book a Visit</a>
       </div>
     </div>
     <div class="hero-scroll-hint">
-      <span>Scroll</span>
+      <span data-i18n="hero.scroll">Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
+    <!-- Brand filters -->
+    <div class="brand-filter-wrap">
+      <div class="brand-filters" id="brandFilters"></div>
+    </div>
 
-  <!-- ===== STATS BAR ===== -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <span class="stat-num">6+</span>
-      <span class="stat-label">Premium Models</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <span class="stat-num">12</span>
-      <span class="stat-label">Years in Business</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <span class="stat-num">2k+</span>
-      <span class="stat-label">Happy Clients</span>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <span class="stat-num">5★</span>
-      <span class="stat-label">Customer Rating</span>
-    </div>
-  </div>
 
-  <!-- ===== CARS SECTION ===== -->
+  <!-- CARS SECTION -->
   <section class="cars-section" id="cars">
     <div class="section-header">
-      <p class="section-eyebrow">Our Fleet</p>
-      <h2 class="section-title">Available Vehicles</h2>
-      <p class="section-desc">Handpicked models offering comfort, performance, and style.</p>
+      <p class="section-eyebrow" data-i18n="cars.eyebrow">Our Fleet</p>
+      <h2 class="section-title"  data-i18n="cars.title"> AVAILABLE  CHINESE VEHICLES</h2>
+      <p class="section-desc"    data-i18n="cars.desc">Handpicked models offering comfort, performance, and style.</p>
     </div>
 
-    <!-- Filter / Search Bar -->
+    <!-- Brand filters -->
+    <div class="brand-filter-wrap">
+      <div class="brand-filters" id="brandFilters"></div>
+    </div>
+
+    <!-- Category + search -->
     <div class="filter-bar">
       <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input type="text" id="searchInput" placeholder="Search by name or description…" />
+        <span class="search-icon">&#9906;</span>
+        <input type="text" id="searchInput" placeholder="Search by name or description…" data-i18n-placeholder="search.placeholder" />
       </div>
       <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="suv">SUV</button>
-        <button class="filter-btn" data-filter="hatchback">Hatchback</button>
-        <button class="filter-btn" data-filter="sedan">Sedan</button>
+        <button class="filter-btn active" data-filter="all"       data-i18n="filter.all">All</button>
+        <button class="filter-btn"        data-filter="suv"       data-i18n="filter.suv">SUV</button>
+        <button class="filter-btn"        data-filter="hatchback" data-i18n="filter.hatchback">Hatchback</button>
+        <button class="filter-btn"        data-filter="sedan"     data-i18n="filter.sedan">Sedan</button>
       </div>
     </div>
 
-    <!-- Car Grid -->
-    <div class="cars-grid" id="carsGrid">
-      <!-- Cards injected by JS -->
-    </div>
-    <p class="no-results" id="noResults" hidden>No cars match your search.</p>
+    <div class="cars-grid" id="carsGrid"></div>
+    <p class="no-results" id="noResults" hidden data-i18n="search.noresults">No cars match your search.</p>
   </section>
 
-  <!-- ===== CONTACT SECTION ===== -->
+  <!-- CONTACT SECTION -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
       <div class="contact-info">
-        <p class="section-eyebrow">Get in Touch</p>
-        <h2 class="section-title">Visit the Showroom</h2>
-        <p class="contact-desc">
+        <p class="section-eyebrow" data-i18n="contact.eyebrow">Get in Touch</p>
+        <h2 class="section-title"  data-i18n="contact.title">Visit the Showroom</h2>
+        <p class="contact-desc"    data-i18n="contact.desc">
           Our team is ready to guide you through every model, arrange a test drive,
           or help you configure your perfect vehicle.
         </p>
         <ul class="contact-details">
           <li>
-            <span class="detail-icon">📍</span>
+            <span class="detail-icon">&#128205;</span>
             <div>
-              <strong>Location</strong>
-              <span>12 Avenue des Constructeurs, Blida, Algeria</span>
+              <strong data-i18n="contact.location.label">Location</strong>
+              <span data-i18n="contact.location.value">GEOSTAR BLIDA</span>
             </div>
           </li>
           <li>
-            <span class="detail-icon">📞</span>
+            <span class="detail-icon">&#128222;</span>
             <div>
-              <strong>Phone</strong>
+              <strong data-i18n="contact.phone.label">Phone</strong>
               <span>+213 563117489</span>
             </div>
           </li>
           <li>
-            <span class="detail-icon">🕐</span>
+            <span class="detail-icon">&#128336;</span>
             <div>
-              <strong>Hours</strong>
-              <span>Sat – Thu: 9:00 AM – 7:00 PM</span>
+              <strong data-i18n="contact.hours.label">Hours</strong>
+              <span data-i18n="contact.hours.value">Sat – Thu: 9:00 AM – 5:00 PM</span>
             </div>
           </li>
         </ul>
       </div>
 
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-group">
-          <label for="fname">Full Name</label>
-          <input type="text" id="fname" placeholder="Ahmed Benali" required />
+      <div class="contact-form-wrap">
+        <!-- Order note (shown when Commander clicked) -->
+        <div class="order-note" id="orderNote" hidden>
+          <span class="order-note-icon">&#9672;</span>
+          <span class="order-note-text" id="orderNoteText"></span>
         </div>
-        <div class="form-group">
-          <label for="femail">Phone Number</label>
-          <input type="text" id="femail" placeholder="+213XXXXXXXXX" required />
-        </div>
-        <div class="form-group">
-          <label for="fmessage">Message</label>
-          <textarea id="fmessage" rows="5" placeholder="I'm interested in the Volkswagen Golf 8…" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary full-width">Send Message</button>
-        <p class="form-success" id="formSuccess" hidden>✓ Message sent! We'll be in touch shortly.</p>
-      </form>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ffirstname" data-i18n="form.firstname.label">First Name</label>
+              <input type="text" id="ffirstname" placeholder="Ahmed" data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
+            </div>
+            <div class="form-group">
+              <label for="flastname" data-i18n="form.lastname.label">Last Name</label>
+              <input type="text" id="flastname"  placeholder="Benali" data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fwilaya" data-i18n="form.wilaya.label">Wilaya of Residence</label>
+            <select id="fwilaya">
+              <option value="">Select your wilaya…</option>
+              <option>Adrar</option><option>Chlef</option><option>Laghouat</option>
+              <option>Oum El Bouaghi</option><option>Batna</option><option>Béjaïa</option>
+              <option>Biskra</option><option>Béchar</option><option>Blida</option>
+              <option>Bouira</option><option>Tamanrasset</option><option>Tébessa</option>
+              <option>Tlemcen</option><option>Tiaret</option><option>Tizi Ouzou</option>
+              <option>Alger</option><option>Djelfa</option><option>Jijel</option>
+              <option>Sétif</option><option>Saïda</option><option>Skikda</option>
+              <option>Sidi Bel Abbès</option><option>Annaba</option><option>Guelma</option>
+              <option>Constantine</option><option>Médéa</option><option>Mostaganem</option>
+              <option>M'Sila</option><option>Mascara</option><option>Ouargla</option>
+              <option>Oran</option><option>El Bayadh</option><option>Illizi</option>
+              <option>Bordj Bou Arréridj</option><option>Boumerdès</option><option>El Tarf</option>
+              <option>Tindouf</option><option>Tissemsilt</option><option>El Oued</option>
+              <option>Khenchela</option><option>Souk Ahras</option><option>Tipaza</option>
+              <option>Mila</option><option>Aïn Defla</option><option>Naâma</option>
+              <option>Aïn Témouchent</option><option>Ghardaïa</option><option>Relizane</option>
+              <option>Timimoun</option><option>Bordj Badji Mokhtar</option>
+              <option>Ouled Djellal</option><option>Béni Abbès</option><option>In Salah</option>
+              <option>In Guezzam</option><option>Touggourt</option><option>Djanet</option>
+              <option>El M'Ghair</option><option>El Meniaa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fphone" data-i18n="form.phone.label">Phone Number</label>
+            <input type="tel" id="fphone" placeholder="05XX XX XX XX" data-i18n-placeholder="form.phone.placeholder" autocomplete="tel" />
+          </div>
+          <p class="form-success" id="formSuccess" hidden></p>
+          <button type="submit" class="btn btn-primary full-width" data-i18n="form.submit">Send Message</button>
+        </form>
+      </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">6+</span>
+      <span class="stat-label" data-i18n="stats.models">Premium Models</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">12</span>
+      <span class="stat-label" data-i18n="stats.years">Years in Business</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">2k+</span>
+      <span class="stat-label" data-i18n="stats.clients">Happy Clients</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">5&#9733;</span>
+      <span class="stat-label" data-i18n="stats.rating">Customer Rating</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <span class="logo-icon">◈</span>
-        <span class="footer-name">GEOSTAR AUTO</span>
+        <img src="logo3.png" alt="GEOSTAR" class="footer-logo-img" />
       </div>
-      <p class="footer-tagline">Driving Excellence Since 2013</p>
+      <p class="footer-tagline" data-i18n="footer.tagline">Driving Excellence Since 2013</p>
       <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#cars">Cars</a>
-        <a href="#contact">Contact</a>
+        <a href="#home"    data-i18n="nav.home">Home</a>
+        <a href="#cars"    data-i18n="nav.cars">Cars</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </div>
-      <p class="footer-copy">© 2026 GEOSTAR AUTO Showroom. All rights reserved.</p>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 GEOSTAR AUTO Showroom. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- ===== CAR DETAILS MODAL ===== -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-      <div class="modal-content" id="modalContent">
-        <!-- Injected by JS -->
-      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
+      <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
 
