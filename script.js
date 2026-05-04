@@ -575,26 +575,51 @@ function initContactForm() {
   var form = document.getElementById('contactForm');
   if (!form) return;
   var success = document.getElementById('formSuccess');
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    var fn=document.getElementById('ffirstname'), ln=document.getElementById('flastname'),
-        wi=document.getElementById('fwilaya'),    ph=document.getElementById('fphone');
-    if (!fn||!ln||!wi||!ph) return;
-    if (!fn.value.trim()||!ln.value.trim()||!wi.value||!ph.value.trim()) {
-      alert(currentLang==='ar'?'يرجى ملء جميع الحقول.':'Please fill in all fields.'); return;
+
+    var fn = document.getElementById('ffirstname');
+    var ln = document.getElementById('flastname');
+    var wi = document.getElementById('fwilaya');
+    var ph = document.getElementById('fphone');
+
+    if (!fn.value.trim() || !ln.value.trim() || !wi.value || !ph.value.trim()) {
+      alert(currentLang === 'ar' ? 'يرجى ملء جميع الحقول.' : 'Please fill in all fields.');
+      return;
     }
+
     var sbtn = form.querySelector('button[type="submit"]');
-    if(sbtn){sbtn.textContent=currentLang==='ar'?'جارٍ الإرسال…':'Sending…';sbtn.disabled=true;}
-    setTimeout(function(){
-      if(success){success.textContent=t('form.success');success.hidden=false;}
+    if (sbtn) {
+      sbtn.textContent = currentLang === 'ar' ? 'جارٍ الإرسال…' : 'Sending…';
+      sbtn.disabled = true;
+    }
+
+    var data = {
+      first_name: fn.value.trim(),
+      last_name:  ln.value.trim(),
+      wilaya:     wi.value,
+      phone:      ph.value.trim() 
+    };
+
+    fetch('PASTE_YOUR_WEB_APP_URL_HERE', {
+      method: 'POST',
+      body:   JSON.stringify(data)
+    })
+    .then(function() {
+      if (success) { success.textContent = t('form.success'); success.hidden = false; }
       form.reset();
-      var note=document.getElementById('orderNote'); if(note) note.hidden=true;
-      if(sbtn){sbtn.textContent=t('form.submit');sbtn.disabled=false;}
-      setTimeout(function(){if(success)success.hidden=true;},5000);
-    },900);
+      var note = document.getElementById('orderNote');
+      if (note) note.hidden = true;
+      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
+      setTimeout(function() { if (success) success.hidden = true; }, 5000);
+    })
+    .catch(function() {
+      alert(currentLang === 'ar' ? 'حدث خطأ، حاول مرة أخرى.' : 'Something went wrong, please try again.');
+      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
+    });
   });
 }
-
 /* ── Smooth scroll ──────────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
