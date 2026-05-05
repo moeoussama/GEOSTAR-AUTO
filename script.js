@@ -569,7 +569,7 @@ function observeReveal() {
 }
 
 /* ── Contact form ───────────────────────────────────────────── */
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx9erbbOmIRoVHpn8-D4gKSaQgpuSF_cVew5V7V944jpwPazFc2bPNlLWRrugasYoomFA/exec';
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
 
 function initContactForm() {
   var form = document.getElementById('contactForm');
