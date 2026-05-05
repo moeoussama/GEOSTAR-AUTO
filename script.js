@@ -5,11 +5,11 @@
 var TRANSLATIONS = {
   en: {
     'nav.home':'Home','nav.cars':'Cars','nav.contact':'Contact',
-    'hero.eyebrow':'Premium Automotive Experience',
-    'hero.sub':'Discover an exceptional collection of vehicles — from refined city cars to commanding SUVs. Every model selected for those who demand the best.',
+    'hero.eyebrow':'Geostar is the best choice',
+    'hero.sub':'The first Algerian website for Chinese car prices in Algeria with competitive prices including shipping costs without customs duties.',
     'hero.cta.fleet':'Explore Fleet','hero.cta.visit':'Book a Visit','hero.scroll':'Scroll',
     'stats.models':'Premium Models','stats.years':'Years in Business','stats.clients':'Happy Clients','stats.rating':'Customer Rating',
-    'cars.eyebrow':'Our Fleet','cars.title':'Available Vehicles','cars.desc':'Handpicked models offering comfort, performance, and style.',
+    'cars.eyebrow':'Our Fleet','cars.title':'AVAILABLE  CHINESE VEHICLES','cars.desc':'Handpicked models offering comfort, performance, and style.',
     'filter.all':'All','filter.suv':'SUV','filter.hatchback':'Hatchback','filter.sedan':'Sedan',
     'search.placeholder':'Search by name or description…','search.noresults':'No cars match your search.',
     'card.viewdetails':'View Car','card.order':'Commander',
@@ -29,11 +29,11 @@ var TRANSLATIONS = {
   },
   ar: {
     'nav.home':'الرئيسية','nav.cars':'السيارات','nav.contact':'التواصل',
-    'hero.eyebrow':'تجربة سيارات فاخرة',
-    'hero.sub':'اكتشف مجموعة استثنائية من السيارات — من سيارات المدينة الأنيقة إلى سيارات الدفع الرباعي الفارهة.',
+    'hero.eyebrow':'جيوستار احسن اختيار',
+    'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر  بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
     'hero.cta.fleet':'استعرض الأسطول','hero.cta.visit':'احجز زيارة','hero.scroll':'مرر',
     'stats.models':'موديلات فاخرة','stats.years':'سنوات في الخدمة','stats.clients':'عميل سعيد','stats.rating':'تقييم العملاء',
-    'cars.eyebrow':'أسطولنا','cars.title':'السيارات المتاحة','cars.desc':'موديلات مختارة بعناية توفر الراحة والأداء والأناقة.',
+    'cars.eyebrow':'أسطولنا','cars.title':'المركبات الصينية المتاحة','cars.desc':'موديلات مختارة بعناية توفر الراحة والأداء والأناقة.',
     'filter.all':'الكل','filter.suv':'دفع رباعي','filter.hatchback':'هاتشباك','filter.sedan':'سيدان',
     'search.placeholder':'ابحث بالاسم أو الوصف…','search.noresults':'لا توجد سيارات تطابق بحثك.',
     'card.viewdetails':'عرض السيارة','card.order':'اطلب الآن',
@@ -123,48 +123,50 @@ var BRANDS = [
 
 var CARS = [
   {
-    id:1,brand:'Volkswagen',name:'Golf 8',price:'7,200,000 DZD',
-    category:'hatchback',badge:'Best Seller',images:['golf 8.jpg'],
+    id:1,brand:'Volkswagen',name:'Golf 8,5',price:'7,200,000 DZD',
+    category:'hatchback',badge:'Best Seller',images:['golf black.jpg','golf black 2.jpg','golf black 3.jpg'],
     description:'The iconic hatchback reimagined. The Golf 8 combines refined style with the latest digital cockpit and driver assistance systems.',
     specs:{Engine:'1.5 TSI EVO — 150 hp',Transmission:'7-speed DSG','Fuel Type':'Petrol','0–100 km/h':'8.5 seconds','Top Speed':'220 km/h','Fuel Eco':'5.8 L/100km'},
     features:['Digital Cockpit Pro','LED Matrix Headlights','ABS + ESC','Adaptive Cruise Control','Lane Assist','Park Assist','Wireless CarPlay','Heated Seats','Rear-View Camera','Travel Assist']
   },
   {
     id:2,brand:'MG',name:'MG 5',price:'4,650,000 DZD',
-    category:'sedan',badge:'Value Pick',images:['mg.jpg'],
+    category:'sedan',badge:'Value Pick',images:['mg5  (1).jpg','mg5  (2) - Copy.jpg', ],
     description:'Modern sedan with sporty lines and a tech-forward interior. The MG 5 delivers impressive value without compromising on comfort.',
     specs:{Engine:'1.5 VTi — 112 hp',Transmission:'5-speed Manual / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
   {
-    id:3,brand:'Livan',name:'GX3 Pro',price:'3,700,000 DZD',
-    category:'suv',badge:'New Arrival',images:['livan.jpg'],
+    id:6,brand:'Jetta',name:'jetta',price:'4,100,000 DZD',
+    category:'suv',badge:null,images:['photo_1_2026-05-04_11-29-56.jpg','photo_3_2026-05-04_11-29-56.jpg','photo_2_2026-05-04_11-29-56.jpg'],
+    description:'Bold design language and a futuristic Pure Panel cockpit set the Mokka apart as one of the most striking compact SUVs available today.',
+    specs:{Engine:'1.2 PureTech Turbo — 130 hp',Transmission:'8-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+  },
+  {
+    id:3,brand:'Volkswagen',name:'t roc',price:'3,700,000 DZD',
+    category:'suv',badge:'New Arrival',images:[ 't roc (2).jpg','t roc (1).jpg',,'t roc (4).jpg'],
     description:'A compact crossover that punches above its weight. The Livan GX3 Pro features a bold exterior design and a feature-rich cabin.',
     specs:{Engine:'1.5T Turbo — 156 hp',Transmission:'7-speed DCT','Fuel Type':'Petrol (Turbo)','0–100 km/h':'9.5 seconds','Top Speed':'195 km/h','Fuel Eco':'6.5 L/100km'},
     features:['Panoramic Sunroof','12" Central Screen','360° Camera','Electric Seats','ABS + ESP','Hill Descent Control','Auto LED Headlights','Voice Control','TPMS']
   },
   {
-    id:4,brand:'Skoda',name:'Kamiq',price:'5,380,000 DZD',
-    category:'suv',badge:null,images:['kamique.jpg'],
+    id:4,brand:'Geely',name:'colray',price:'5,380,000 DZD',
+    category:'suv',badge:null,images:['colray (2).jpg' ,'colray (1).jpg'  ],
     description:'Czech precision meets urban versatility. The Kamiq is a city-friendly SUV with a spacious interior and premium build quality.',
     specs:{Engine:'1.0 TSI — 115 hp',Transmission:'6-speed Manual / 7-speed DSG','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
   {
-    id:5,brand:'Volkswagen',name:'Tharu',price:'5,890,000 DZD',
-    category:'suv',badge:'Popular',images:['tharu.jpg'],
+    id:5,brand:'Volkswagen',name:'Golf 8,5',price:'5,890,000 DZD',
+    category:'suv',badge:'Popular',images:['golf gray (2).jpg','golf gray (4).jpg','golf gray (3).jpg'],
     description:"The Tharu is Volkswagen's dynamic mid-size SUV — bold, comfortable and loaded with the tech that defines modern driving.",
     specs:{Engine:'2.0 TSI — 186 hp',Transmission:'7-speed DSG (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
-  {
-    id:6,brand:'Opel',name:'Mokka',price:'4,100,000 DZD',
-    category:'suv',badge:null,images:['moka2.jpg'],
-    description:'Bold design language and a futuristic Pure Panel cockpit set the Mokka apart as one of the most striking compact SUVs available today.',
-    specs:{Engine:'1.2 PureTech Turbo — 130 hp',Transmission:'8-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  }
+ 
 ];
+ 
 
 /* ── State ──────────────────────────────────────────────────── */
 var activeFilter    = 'all';
@@ -569,8 +571,6 @@ function observeReveal() {
 }
 
 /* ── Contact form ───────────────────────────────────────────── */
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
-
 function initContactForm() {
   var form = document.getElementById('contactForm');
   if (!form) return;
@@ -583,35 +583,43 @@ function initContactForm() {
     var ln = document.getElementById('flastname');
     var wi = document.getElementById('fwilaya');
     var ph = document.getElementById('fphone');
-    if (!fn||!ln||!wi||!ph) return;
 
-    if (!fn.value.trim()||!ln.value.trim()||!wi.value||!ph.value.trim()) {
-      alert(currentLang==='ar'?'يرجى ملء جميع الحقول.':'Please fill in all fields.');
+    if (!fn.value.trim() || !ln.value.trim() || !wi.value || !ph.value.trim()) {
+      alert(currentLang === 'ar' ? 'يرجى ملء جميع الحقول.' : 'Please fill in all fields.');
       return;
     }
 
     var sbtn = form.querySelector('button[type="submit"]');
-    if (sbtn) { sbtn.textContent = currentLang==='ar'?'جارٍ الإرسال…':'Sending…'; sbtn.disabled = true; }
+    if (sbtn) {
+      sbtn.textContent = currentLang === 'ar' ? 'جارٍ الإرسال…' : 'Sending…';
+      sbtn.disabled = true;
+    }
 
-    // Use URL params to avoid CORS preflight
-    var params = 'first_name=' + encodeURIComponent(fn.value.trim())
-               + '&last_name='  + encodeURIComponent(ln.value.trim())
-               + '&wilaya='     + encodeURIComponent(wi.value)
-               + '&phone='      + encodeURIComponent(ph.value.trim());
+    var data = {
+      first_name: fn.value.trim(),
+      last_name:  ln.value.trim(),
+      wilaya:     wi.value,
+      phone:      ph.value.trim() 
+    };
 
-    var img = new Image();
-    img.src = SHEET_URL + '?' + params;
-
-    setTimeout(function() {
+    fetch('PASTE_YOUR_WEB_APP_URL_HERE', {
+      method: 'POST',
+      body:   JSON.stringify(data)
+    })
+    .then(function() {
       if (success) { success.textContent = t('form.success'); success.hidden = false; }
       form.reset();
-      var note = document.getElementById('orderNote'); if (note) note.hidden = true;
+      var note = document.getElementById('orderNote');
+      if (note) note.hidden = true;
       if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
       setTimeout(function() { if (success) success.hidden = true; }, 5000);
-    }, 1500);
+    })
+    .catch(function() {
+      alert(currentLang === 'ar' ? 'حدث خطأ، حاول مرة أخرى.' : 'Something went wrong, please try again.');
+      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
+    });
   });
 }
-
 /* ── Smooth scroll ──────────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
