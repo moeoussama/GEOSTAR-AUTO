@@ -175,6 +175,7 @@ var searchQuery     = '';
 var currentLang     = 'en';
 var modalGalleryIdx = 0;
 var galleryState    = {};
+var selectedCarName = '';
 
 /* ── i18n ───────────────────────────────────────────────────── */
 function t(key) {
@@ -451,10 +452,14 @@ function closeModal() {
 
 /* ── Order scroll ───────────────────────────────────────────── */
 function scrollToOrder(name) {
+  selectedCarName = name;
+
   var s = document.getElementById('contact');
   if (s) s.scrollIntoView({behavior:'smooth',block:'start'});
+
   var noteEl   = document.getElementById('orderNote');
   var noteText = document.getElementById('orderNoteText');
+
   if (noteEl && noteText && name) {
     noteText.textContent = (currentLang==='ar'?'طلب: ':'Ordering: ')+name;
     noteEl.hidden = false;
@@ -572,12 +577,14 @@ function observeReveal() {
 var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
 /* ── Contact form ───────────────────────────────────────────── */
 function initContactForm() {
+  
   var form = document.getElementById('contactForm');
   if (!form) return;
   var success = document.getElementById('formSuccess');
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    console.log("clicked")
 
     var fn = document.getElementById('ffirstname');
     var ln = document.getElementById('flastname');
@@ -595,29 +602,66 @@ function initContactForm() {
       sbtn.disabled = true;
     }
 
-    var data = {
-      first_name: fn.value.trim(),
-      last_name:  ln.value.trim(),
-      wilaya:     wi.value,
-      phone:      ph.value.trim() 
-    };
+  var selectedCar = selectedCarName || 'No car selected';
 
-    fetch('https://vercel-api-eight-orcin.vercel.app/', {
-      method: 'POST',
-      body:   JSON.stringify(data)
-    })
-    .then(function() {
-      if (success) { success.textContent = t('form.success'); success.hidden = false; }
-      form.reset();
-      var note = document.getElementById('orderNote');
-      if (note) note.hidden = true;
-      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
-      setTimeout(function() { if (success) success.hidden = true; }, 5000);
-    })
-    .catch(function() {
-      alert(currentLang === 'ar' ? 'حدث خطأ، حاول مرة أخرى.' : 'Something went wrong, please try again.');
-      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
+var data = {
+  name: fn.value.trim() + ' ' + ln.value.trim(),
+  number: ph.value.trim(),
+  message: 'Wilaya: ' + wi.value + ' | Car: ' + selectedCar
+};
+
+fetch('https://vercel-api-eight-orcin.vercel.app/book-ticket', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(function(response) {
+  if (!response.ok) {
+    return response.json().then(function(err) {
+      throw new Error(err.error || 'Request failed');
     });
+  }
+
+  return response.json();
+})
+.then(function(res) {
+  console.log(res);
+
+  if (success) {
+    success.textContent = t('form.success');
+    success.hidden = false;
+  }
+
+  form.reset();
+
+  var note = document.getElementById('orderNote');
+  if (note) note.hidden = true;
+
+  if (sbtn) {
+    sbtn.textContent = t('form.submit');
+    sbtn.disabled = false;
+  }
+
+  setTimeout(function() {
+    if (success) success.hidden = true;
+  }, 5000);
+})
+.catch(function(err) {
+  console.error(err);
+
+  alert(
+    currentLang === 'ar'
+      ? 'حدث خطأ: ' + err.message
+      : 'Error: ' + err.message
+  );
+
+  if (sbtn) {
+    sbtn.textContent = t('form.submit');
+    sbtn.disabled = false;
+  }
+});
   });
 }
 /* ── Smooth scroll ──────────────────────────────────────────── */
