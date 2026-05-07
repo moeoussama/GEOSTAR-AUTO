@@ -602,7 +602,7 @@ function initContactForm() {
       phone:      ph.value.trim() 
     };
 
-    fetch('PASTE_YOUR_WEB_APP_URL_HERE', {
+    fetch('https://vercel-api-eight-orcin.vercel.app/', {
       method: 'POST',
       body:   JSON.stringify(data)
     })
