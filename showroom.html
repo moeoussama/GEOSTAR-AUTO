@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEOSTAR — Showroom Stock</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="showroom.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo3.png" alt="GEOSTAR" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"          class="nav-link" data-i18n="nav.home">Home</a></li>
+        <li><a href="index.html#cars"     class="nav-link" data-i18n="nav.order">Order</a></li>
+        <li><a href="showroom.html"       class="nav-link active" data-i18n="nav.showroom">Showroom</a></li>
+        <li><a href="index.html#contact"  class="nav-link" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+          <span class="lang-icon">EN</span>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">☽</span>
+        </button>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="showroom-hero">
+    <div class="showroom-hero-bg">
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-gradient"></div>
+    </div>
+    <div class="showroom-hero-content">
+      <p class="hero-eyebrow fade-up" data-i18n="showroom.eyebrow">Available Now</p>
+      <h1 class="showroom-hero-title fade-up delay-1" data-i18n="showroom.title">
+        In-Stock <em>Showroom</em> Vehicles
+      </h1>
+      <p class="hero-sub fade-up delay-2" data-i18n="showroom.sub">
+        These cars are physically at our showroom in Blida — ready for immediate viewing,
+        test drive, and purchase today.
+      </p>
+      <!-- Distinction banner -->
+      <div class="distinction-bar fade-up delay-3">
+        <div class="distinction-item distinction-stock">
+          <span class="distinction-dot"></span>
+          <span data-i18n="showroom.badge.instock">In Showroom — Ready Now</span>
+        </div>
+        <div class="distinction-divider"></div>
+        <div class="distinction-item distinction-order">
+          <span class="distinction-dot"></span>
+          <a href="index.html#cars" data-i18n="showroom.badge.order">Order Cars → Visit Main Page</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FILTER BAR ===== -->
+  <div class="showroom-filter-bar">
+    <div class="showroom-filter-inner">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="stockSearch" placeholder="Search stock…"
+               data-i18n-placeholder="showroom.search" />
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-stock-filter="all"       data-i18n="filter.all">All</button>
+        <button class="filter-btn"        data-stock-filter="available" data-i18n="showroom.filter.available">Available</button>
+        <button class="filter-btn"        data-stock-filter="reserved"  data-i18n="showroom.filter.reserved">Reserved</button>
+        <button class="filter-btn"        data-stock-filter="suv"       data-i18n="filter.suv">SUV</button>
+        <button class="filter-btn"        data-stock-filter="sedan"     data-i18n="filter.sedan">Sedan</button>
+        <button class="filter-btn"        data-stock-filter="hatchback" data-i18n="filter.hatchback">Hatchback</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STOCK GRID ===== -->
+  <section class="showroom-section">
+    <div class="showroom-grid" id="stockGrid"></div>
+    <p class="no-results" id="stockNoResults" hidden>No vehicles match your search.</p>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <div class="showroom-cta-banner">
+    <div class="showroom-cta-inner">
+      <div>
+        <p class="showroom-cta-title" data-i18n="showroom.cta.title">Looking for a car to order?</p>
+        <p class="showroom-cta-sub"   data-i18n="showroom.cta.sub">Browse our full catalogue of vehicles available for order with competitive prices.</p>
+      </div>
+      <a href="index.html#cars" class="btn btn-primary" data-i18n="showroom.cta.btn">View Order Cars</a>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo3.png" alt="GEOSTAR" class="footer-logo-img" />
+      </div>
+      <p class="footer-tagline" data-i18n="footer.tagline">Driving Excellence Since 2013</p>
+      <div class="footer-links">
+        <a href="index.html"         data-i18n="nav.home">Home</a>
+        <a href="showroom.html"      data-i18n="nav.showroom">Showroom</a>
+        <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 GEOSTAR AUTO Showroom. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="showroom.js"></script>
+</body>
+</html>
