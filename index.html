@@ -10,17 +10,18 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ===== NAVBAR ===== -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#home" class="nav-logo">
         <img src="logo3.png" alt="GEOSTAR" class="nav-logo-img" />
       </a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#home"    class="nav-link active" data-i18n="nav.home">Home</a></li>
-        <li><a href="#cars"    class="nav-link"        data-i18n="nav.cars">Cars</a></li>
-        <li><a href="#contact" class="nav-link"        data-i18n="nav.contact">Contact</a></li>
-      </ul>
+      <li><a href="#home"       class="nav-link active" data-i18n="nav.home">Home</a></li>
+      <li><a href="#order"       class="nav-link"        data-i18n="nav.order">order</a></li>
+      <li><a href="showroom.html" class="nav-link"      data-i18n="nav.showroom">Showroom</a></li>
+      <li><a href="#contact"    class="nav-link"        data-i18n="nav.contact">Contact</a></li>
+       </ul>
       <div class="nav-actions">
         <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
           <span class="lang-icon">EN</span>
@@ -35,7 +36,7 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-bg">
       <div class="hero-grid-overlay"></div>
@@ -45,10 +46,10 @@
       <div class="hero-logo-wrap fade-up">
         <img src="logo3.png" alt="GEOSTAR" class="hero-logo-img" />
       </div>
-      <p class="hero-eyebrow fade-up delay-1" data-i18n="hero.eyebrow">Premium Automotive Experience</p>
+      <p class="hero-eyebrow fade-up delay-1" data-i18n="hero.eyebrow">Geostar is the best choice</p>
       <p class="hero-sub fade-up delay-2" data-i18n="hero.sub">
-        Discover an exceptional collection of vehicles — from refined city cars to commanding SUVs.
-        Every model selected for those who demand the best.
+        The first Algerian website for Chinese car prices in Algeria with competitive prices
+        including shipping costs without customs duties.
       </p>
       <div class="hero-cta fade-up delay-3">
         <a href="#cars"    class="btn btn-primary" data-i18n="hero.cta.fleet">Explore Fleet</a>
@@ -60,44 +61,89 @@
       <div class="scroll-line"></div>
     </div>
   </section>
-    <!-- Brand filters -->
-    <div class="brand-filter-wrap">
-      <div class="brand-filters" id="brandFilters"></div>
-    </div>
+  
 
 
-  <!-- CARS SECTION -->
+  <!-- ===== CARS SECTION ===== -->
   <section class="cars-section" id="cars">
     <div class="section-header">
       <p class="section-eyebrow" data-i18n="cars.eyebrow">Our Fleet</p>
-      <h2 class="section-title"  data-i18n="cars.title"> AVAILABLE  CHINESE VEHICLES</h2>
+      <h2 class="section-title"  data-i18n="cars.title">Available Chinese Vehicles</h2>
       <p class="section-desc"    data-i18n="cars.desc">Handpicked models offering comfort, performance, and style.</p>
     </div>
-
-    <!-- Brand filters -->
-    <div class="brand-filter-wrap">
-      <div class="brand-filters" id="brandFilters"></div>
-    </div>
-
-    <!-- Category + search -->
+     <!-- Category + search -->
     <div class="filter-bar">
       <div class="search-wrap">
-        <span class="search-icon">&#9906;</span>
-        <input type="text" id="searchInput" placeholder="Search by name or description…" data-i18n-placeholder="search.placeholder" />
+        <span class="search-icon">⌕</span>
+        <input type="text" id="searchInput" placeholder="Search by name or description…"
+               data-i18n-placeholder="search.placeholder" />
       </div>
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all"       data-i18n="filter.all">All</button>
-        <button class="filter-btn"        data-filter="suv"       data-i18n="filter.suv">SUV</button>
-        <button class="filter-btn"        data-filter="hatchback" data-i18n="filter.hatchback">Hatchback</button>
-        <button class="filter-btn"        data-filter="sedan"     data-i18n="filter.sedan">Sedan</button>
-      </div>
+      
     </div>
+<div class="brand-logo-grid-section">
+  <div class="brand-logo-grid" id="brandLogoGrid">
+   
+    
 
+    <button class="brand-logo-card active" data-filter-brand="all">
+      <span class="brand-logo-card-label">All Brands</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="Volkswagen">
+      <img src="volkswagen-logo-2019.svg" alt="Volkswagen" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Volkswagen</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="MG">
+      <img src="mg.svg" alt="MG" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">MG</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="Geely">
+      <img src="gely logo.png" alt="Geely" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Geely</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="Jetour">
+      <img src="jetour-logo.png" alt="Jetour" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Jetour</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="Kia">
+      <img src="kia-4.svg" alt="Kia" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Kia</span>
+    </button>
+
+    
+
+    <button class="brand-logo-card" data-filter-brand="Changan">
+      <img src="Changan-Logo-2013-2048x1152.png" alt="Changan" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Changan</span>
+    </button>
+
+   
+
+    <button class="brand-logo-card" data-filter-brand="Livan">
+      <img src="livan log" alt="Livan" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Livan</span>
+    </button>
+
+    <button class="brand-logo-card" data-filter-brand="Jetta">
+      <img src="Jetta-Logo-1.png" alt="Jetta" class="brand-logo-card-img" />
+      <span class="brand-logo-card-label">Jetta</span>
+    </button>
+
+  </div>
+</div>
+   
+
+
+    
     <div class="cars-grid" id="carsGrid"></div>
     <p class="no-results" id="noResults" hidden data-i18n="search.noresults">No cars match your search.</p>
   </section>
 
-  <!-- CONTACT SECTION -->
+  <!-- ===== CONTACT SECTION ===== -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
       <div class="contact-info">
@@ -108,51 +154,65 @@
           or help you configure your perfect vehicle.
         </p>
         <ul class="contact-details">
+         <li>
+  <a href="https://maps.app.goo.gl/WGDFHHqJXuGJder48" target="_blank" rel="noopener" class="contact-link">
+    <span class="detail-icon">📍</span>
+    <div>
+      <strong data-i18n="contact.location.label">Location</strong>
+      <span data-i18n="contact.location.value">GEOSTAR BLIDA</span>
+    </div>
+  </a>
+</li>
           <li>
-            <span class="detail-icon">&#128205;</span>
-            <div>
-              <strong data-i18n="contact.location.label">Location</strong>
-              <span data-i18n="contact.location.value">GEOSTAR BLIDA</span>
-            </div>
-          </li>
+  <a href="tel:+213563117489" class="contact-link">
+    <span class="detail-icon">📞</span>
+    <div>
+      <strong data-i18n="contact.phone.label">Phone</strong>
+      <span>+213 563117489</span>
+    </div>
+  </a>
+</li>
+<li>
+  <a href="tel:+213563118968" class="contact-link">
+    <span class="detail-icon">📞</span>
+    <div>
+      <strong data-i18n="contact.phone.label">Phone</strong>
+      <span>+213 563118968</span>
+    </div>
+  </a>
+</li>
           <li>
-            <span class="detail-icon">&#128222;</span>
-            <div>
-              <strong data-i18n="contact.phone.label">Phone</strong>
-              <span>+213 563117489</span>
-            </div>
-          </li>
-          <li>
-            <span class="detail-icon">&#128336;</span>
+            <span class="detail-icon">🕐</span>
             <div>
               <strong data-i18n="contact.hours.label">Hours</strong>
-              <span data-i18n="contact.hours.value">Sat – Thu: 9:00 AM – 5:00 PM</span>
+              <span   data-i18n="contact.hours.value">Sat – Thu: 9:00 AM – 5:00 PM</span>
             </div>
           </li>
         </ul>
       </div>
 
       <div class="contact-form-wrap">
-        <!-- Order note (shown when Commander clicked) -->
         <div class="order-note" id="orderNote" hidden>
-          <span class="order-note-icon">&#9672;</span>
+          <span class="order-note-icon">◈</span>
           <span class="order-note-text" id="orderNoteText"></span>
         </div>
 
-        <form class="contact-form" id="contactForm" novalidate> 
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="ffirstname" data-i18n="form.firstname.label">First Name</label>
-              <input type="text" id="ffirstname"   placeholder="Ahmed" data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
+              <input type="text" id="ffirstname" placeholder="Ahmed"
+                     data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
             </div>
             <div class="form-group">
               <label for="flastname" data-i18n="form.lastname.label">Last Name</label>
-              <input type="text" id="flastname"   placeholder="Benali" data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
+              <input type="text" id="flastname" placeholder="Benali"
+                     data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
             </div>
           </div>
           <div class="form-group">
             <label for="fwilaya" data-i18n="form.wilaya.label">Wilaya of Residence</label>
-            <select id="fwilaya"> 
+            <select id="fwilaya">
               <option value="">Select your wilaya…</option>
               <option>Adrar</option><option>Chlef</option><option>Laghouat</option>
               <option>Oum El Bouaghi</option><option>Batna</option><option>Béjaïa</option>
@@ -178,7 +238,8 @@
           </div>
           <div class="form-group">
             <label for="fphone" data-i18n="form.phone.label">Phone Number</label>
-            <input type="tel" id="fphone"    placeholder="05XX XX XX XX" data-i18n-placeholder="form.phone.placeholder" autocomplete="tel" />
+            <input type="tel" id="fphone" placeholder="05XX XX XX XX"
+                   data-i18n-placeholder="form.phone.placeholder" autocomplete="tel" />
           </div>
           <p class="form-success" id="formSuccess" hidden></p>
           <button type="submit" class="btn btn-primary full-width" data-i18n="form.submit">Send Message</button>
@@ -186,8 +247,7 @@
       </div>
     </div>
   </section>
-
-  <!-- STATS BAR -->
+  <!-- ===== STATS BAR ===== -->
   <div class="stats-bar">
     <div class="stat-item">
       <span class="stat-num">6+</span>
@@ -205,12 +265,12 @@
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-num">5&#9733;</span>
+      <span class="stat-num">5★</span>
       <span class="stat-label" data-i18n="stats.rating">Customer Rating</span>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
@@ -226,10 +286,10 @@
     </div>
   </footer>
 
-  <!-- MODAL -->
+  <!-- ===== MODAL ===== -->
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
       <div class="modal-content" id="modalContent"></div>
     </div>
   </div>

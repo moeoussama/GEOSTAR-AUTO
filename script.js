@@ -1,15 +1,16 @@
 /* ============================================================
-   GEOSTAR Car Showroom — script.js  (clean rewrite)
+   GEOSTAR Car Showroom — script.js
    ============================================================ */
 
-var TRANSLATIONS = {
+
+ var TRANSLATIONS = {
   en: {
-    'nav.home':'Home','nav.cars':'Cars','nav.contact':'Contact',
+    'nav.home':'Home','nav.order':'Order','nav.showroom':'Showroom','nav.contact':'Contact',
     'hero.eyebrow':'Geostar is the best choice',
     'hero.sub':'The first Algerian website for Chinese car prices in Algeria with competitive prices including shipping costs without customs duties.',
     'hero.cta.fleet':'Explore Fleet','hero.cta.visit':'Book a Visit','hero.scroll':'Scroll',
     'stats.models':'Premium Models','stats.years':'Years in Business','stats.clients':'Happy Clients','stats.rating':'Customer Rating',
-    'cars.eyebrow':'Our Fleet','cars.title':'AVAILABLE  CHINESE VEHICLES','cars.desc':'Handpicked models offering comfort, performance, and style.',
+    'cars.eyebrow':'Our Fleet','cars.title':'AVAILABLE CHINESE VEHICLES','cars.desc':'Handpicked models offering comfort, performance, and style.',
     'filter.all':'All','filter.suv':'SUV','filter.hatchback':'Hatchback','filter.sedan':'Sedan',
     'search.placeholder':'Search by name or description…','search.noresults':'No cars match your search.',
     'card.viewdetails':'View Car','card.order':'Commander',
@@ -25,12 +26,14 @@ var TRANSLATIONS = {
     'form.submit':'Send Message','form.success':'✓ Message sent! We\'ll be in touch shortly.',
     'footer.tagline':'Driving Excellence Since 2013','footer.copy':'© 2026 GEOSTAR AUTO Showroom. All rights reserved.',
     'spec.engine':'Engine','spec.transmission':'Transmission','spec.fuel':'Fuel Type',
-    'spec.acceleration':'0–100 km/h','spec.topspeed':'Top Speed','spec.economy':'Fuel Eco'
+    'spec.acceleration':'0–100 km/h','spec.topspeed':'Top Speed','spec.economy':'Fuel Eco',
+    'nav.showroom':'Showroom',
+    'nav.order':'Order'
   },
   ar: {
-    'nav.home':'الرئيسية','nav.cars':'السيارات','nav.contact':'التواصل',
+     'nav.home':'الرئيسية','nav.order':'الطلب','nav.showroom':'المعرض','nav.contact':'التواصل',
     'hero.eyebrow':'جيوستار احسن اختيار',
-    'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر  بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
+    'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
     'hero.cta.fleet':'استعرض الأسطول','hero.cta.visit':'احجز زيارة','hero.scroll':'مرر',
     'stats.models':'موديلات فاخرة','stats.years':'سنوات في الخدمة','stats.clients':'عميل سعيد','stats.rating':'تقييم العملاء',
     'cars.eyebrow':'أسطولنا','cars.title':'المركبات الصينية المتاحة','cars.desc':'موديلات مختارة بعناية توفر الراحة والأداء والأناقة.',
@@ -49,7 +52,9 @@ var TRANSLATIONS = {
     'form.submit':'إرسال الرسالة','form.success':'✓ تم إرسال رسالتك! سنتواصل معك قريباً.',
     'footer.tagline':'نحو التميز في القيادة منذ 2013','footer.copy':'© 2026 معرض جيوستار أوتو. جميع الحقوق محفوظة.',
     'spec.engine':'المحرك','spec.transmission':'ناقل الحركة','spec.fuel':'نوع الوقود',
-    'spec.acceleration':'0–100 كم/س','spec.topspeed':'السرعة القصوى','spec.economy':'استهلاك الوقود'
+    'spec.acceleration':'0–100 كم/س','spec.topspeed':'السرعة القصوى','spec.economy':'استهلاك الوقود',
+    'nav.showroom':'المعرض',
+    'nav.order':'الطلب'
   }
 };
 
@@ -130,45 +135,50 @@ var CARS = [
     features:['Digital Cockpit Pro','LED Matrix Headlights','ABS + ESC','Adaptive Cruise Control','Lane Assist','Park Assist','Wireless CarPlay','Heated Seats','Rear-View Camera','Travel Assist']
   },
   {
-    id:2,brand:'MG',name:'MG 5',price:'4,650,000 DZD',
-    category:'sedan',badge:'Value Pick',images:['mg5  (1).jpg','mg5  (2) - Copy.jpg', ],
+    id:2,brand:'MG',name:'MG 5',price:'2,250,000 DZD',
+    category:'sedan',badge:'Value Pick',images:['mg5  (1).jpg','mg5  (2) - Copy.jpg'],
     description:'Modern sedan with sporty lines and a tech-forward interior. The MG 5 delivers impressive value without compromising on comfort.',
     specs:{Engine:'1.5 VTi — 112 hp',Transmission:'5-speed Manual / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
   {
-    id:6,brand:'Jetta',name:'jetta',price:'4,100,000 DZD',
+    id:6,brand:'Jetta',name:'Jetta',price:'3,880,000 DZD',
     category:'suv',badge:null,images:['photo_1_2026-05-04_11-29-56.jpg','photo_3_2026-05-04_11-29-56.jpg','photo_2_2026-05-04_11-29-56.jpg'],
-    description:'Bold design language and a futuristic Pure Panel cockpit set the Mokka apart as one of the most striking compact SUVs available today.',
+    description:'Bold design language and a futuristic Pure Panel cockpit set the Jetta apart as one of the most striking compact SUVs available today.',
     specs:{Engine:'1.2 PureTech Turbo — 130 hp',Transmission:'8-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
   {
-    id:3,brand:'Volkswagen',name:'t roc',price:'3,700,000 DZD',
-    category:'suv',badge:'New Arrival',images:[ 't roc (2).jpg','t roc (1).jpg',,'t roc (4).jpg'],
-    description:'A compact crossover that punches above its weight. The Livan GX3 Pro features a bold exterior design and a feature-rich cabin.',
+    id:3,brand:'Volkswagen',name:'T-Roc',price:'3,700,000 DZD',
+    category:'suv',badge:'New Arrival',images:['t roc (2).jpg','t roc (1).jpg','t roc (4).jpg'],
+    description:'A compact crossover that punches above its weight. The T-Roc features a bold exterior design and a feature-rich cabin.',
     specs:{Engine:'1.5T Turbo — 156 hp',Transmission:'7-speed DCT','Fuel Type':'Petrol (Turbo)','0–100 km/h':'9.5 seconds','Top Speed':'195 km/h','Fuel Eco':'6.5 L/100km'},
     features:['Panoramic Sunroof','12" Central Screen','360° Camera','Electric Seats','ABS + ESP','Hill Descent Control','Auto LED Headlights','Voice Control','TPMS']
   },
   {
-    id:4,brand:'Geely',name:'colray',price:'5,380,000 DZD',
-    category:'suv',badge:null,images:['colray (2).jpg' ,'colray (1).jpg'  ],
-    description:'Czech precision meets urban versatility. The Kamiq is a city-friendly SUV with a spacious interior and premium build quality.',
+    id:4,brand:'Geely',name:'Coolray',price:'3,500,000 DZD',
+    category:'suv',badge:null,images:['colray (2).jpg','colray (1).jpg'],
+    description:'Urban versatility meets premium build quality. The Coolray is a city-friendly SUV with a spacious interior.',
+    specs:{Engine:'1.0 TSI — 115 hp',Transmission:'6-speed Manual / 7-speed DSG','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
+    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
+  },
+  {
+    id:7,brand:'livan',name:'livan GX3',price:'2,380,000 DZD',
+    category:'suv',badge:null,images:['photo_2026-05-26_12-13-19.jpg','photo_2026-05-26_12-13-19.jpg' ,'LIVANAA.jpg'],
+    description:'Urban versatility meets premium build quality. The Coolray is a city-friendly SUV with a spacious interior.',
     specs:{Engine:'1.0 TSI — 115 hp',Transmission:'6-speed Manual / 7-speed DSG','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
   {
     id:5,brand:'Volkswagen',name:'Golf 8,5',price:'5,890,000 DZD',
     category:'suv',badge:'Popular',images:['golf gray (2).jpg','golf gray (4).jpg','golf gray (3).jpg'],
-    description:"The Tharu is Volkswagen's dynamic mid-size SUV — bold, comfortable and loaded with the tech that defines modern driving.",
+    description:"Volkswagen's dynamic hatchback — bold, comfortable and loaded with the tech that defines modern driving.",
     specs:{Engine:'2.0 TSI — 186 hp',Transmission:'7-speed DSG (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
- 
+  }
 ];
- 
 
-/* ── State ──────────────────────────────────────────────────── */
+/* ── State ───────────────────────────────────────────────── */
 var activeFilter    = 'all';
 var activeBrand     = 'all';
 var searchQuery     = '';
@@ -177,7 +187,7 @@ var modalGalleryIdx = 0;
 var galleryState    = {};
 var selectedCarName = '';
 
-/* ── i18n ───────────────────────────────────────────────────── */
+/* ── i18n ────────────────────────────────────────────────── */
 function t(key) {
   return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key])
     || TRANSLATIONS.en[key] || key;
@@ -195,7 +205,7 @@ function applyTranslations() {
   renderCars();
 }
 
-/* ── Translation helpers ────────────────────────────────────── */
+/* ── Translation helpers ─────────────────────────────────── */
 function tBadge(b)   { return b ? (currentLang==='ar' ? (CAR_AR.badges[b]||b) : b) : null; }
 function tDesc(car)  { return currentLang==='ar' ? (CAR_AR.descriptions[car.id]||car.description) : car.description; }
 function tSpec(v)    { return currentLang==='ar' ? (CAR_AR.specs[v]||v) : v; }
@@ -213,7 +223,7 @@ function localSpecs(car) {
   return o;
 }
 
-/* ── Filter ─────────────────────────────────────────────────── */
+/* ── Filter ──────────────────────────────────────────────── */
 function getFiltered() {
   return CARS.filter(function(car) {
     var okCat   = activeFilter === 'all' || car.category === activeFilter;
@@ -226,17 +236,17 @@ function getFiltered() {
   });
 }
 
-/* ── Card HTML ──────────────────────────────────────────────── */
+/* ── Card HTML ───────────────────────────────────────────── */
 function cardHTML(car) {
-  var imgs  = (car.images && car.images.length) ? car.images : [''];
+  var imgs  = (car.images && car.images.length) ? car.images.filter(Boolean) : [''];
   var idx   = galleryState[car.id] || 0;
   var badge = tBadge(car.badge);
 
-  var badgeH  = badge ? '<div class="car-badge">'+badge+'</div>' : '';
-  var arrowH  = imgs.length > 1
+  var badgeH = badge ? '<div class="car-badge">'+badge+'</div>' : '';
+  var arrowH = imgs.length > 1
     ? '<button class="gallery-arrow gallery-prev" data-car-id="'+car.id+'">&#8249;</button>'
     + '<button class="gallery-arrow gallery-next" data-car-id="'+car.id+'">&#8250;</button>' : '';
-  var dotsH   = imgs.length > 1
+  var dotsH = imgs.length > 1
     ? '<div class="gallery-dots">'+imgs.map(function(_,i){
         return '<span class="gallery-dot'+(i===idx?' active':'')+'"></span>';
       }).join('')+'</div>' : '';
@@ -263,7 +273,7 @@ function cardHTML(car) {
   +'</article>';
 }
 
-/* ── Render cars ────────────────────────────────────────────── */
+/* ── Render cars ─────────────────────────────────────────── */
 function renderCars() {
   var grid = document.getElementById('carsGrid');
   if (!grid) return;
@@ -273,14 +283,13 @@ function renderCars() {
   if (noRes) { noRes.hidden = filtered.length > 0; if (!noRes.hidden) noRes.textContent = t('search.noresults'); }
   observeReveal();
 
-  /* card gallery arrows */
   grid.querySelectorAll('.gallery-arrow').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
       var cid  = parseInt(btn.getAttribute('data-car-id'));
       var car  = CARS.filter(function(c){return c.id===cid;})[0];
       if (!car) return;
-      var imgs = (car.images && car.images.length) ? car.images : [''];
+      var imgs = (car.images && car.images.length) ? car.images.filter(Boolean) : [''];
       var cur  = galleryState[cid] || 0;
       var nxt  = btn.classList.contains('gallery-prev') ? cur-1 : cur+1;
       galleryState[cid] = (nxt + imgs.length) % imgs.length;
@@ -294,7 +303,6 @@ function renderCars() {
     });
   });
 
-  /* View Car button */
   grid.querySelectorAll('.btn-view').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -302,7 +310,6 @@ function renderCars() {
     });
   });
 
-  /* Commander button on card */
   grid.querySelectorAll('.btn-order').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -311,7 +318,6 @@ function renderCars() {
     });
   });
 
-  /* click anywhere on card */
   grid.querySelectorAll('.car-card').forEach(function(card) {
     card.addEventListener('click', function(e) {
       if (e.target.closest('.btn-view')||e.target.closest('.btn-order')||e.target.closest('.gallery-arrow')) return;
@@ -323,7 +329,7 @@ function renderCars() {
   });
 }
 
-/* ── Brand filters ──────────────────────────────────────────── */
+/* ── Brand filter text buttons (inside cars section) ─────── */
 function renderBrandFilters() {
   var c = document.getElementById('brandFilters');
   if (!c) return;
@@ -339,12 +345,60 @@ function renderBrandFilters() {
       activeBrand = btn.getAttribute('data-brand');
       c.querySelectorAll('.brand-btn').forEach(function(b){b.classList.remove('active');});
       btn.classList.add('active');
+      syncLogoGrid();
       renderCars();
     });
   });
 }
 
-/* ── Modal ──────────────────────────────────────────────────── */
+/* ── Brand Logo Grid (replaces marquee) ──────────────────── */
+function syncLogoGrid() {
+  /* Keep logo grid in sync when text filter buttons are used */
+  var grid = document.getElementById('brandLogoGrid');
+  if (!grid) return;
+  grid.querySelectorAll('.brand-logo-card').forEach(function(card) {
+    var brand = card.getAttribute('data-filter-brand') || 'all';
+    card.classList.toggle('active', brand === activeBrand);
+  });
+}
+
+function initBrandLogoGrid() {
+  var grid = document.getElementById('brandLogoGrid');
+  if (!grid) return;
+
+  grid.querySelectorAll('.brand-logo-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      /* Remove active from all cards */
+      grid.querySelectorAll('.brand-logo-card').forEach(function(c) {
+        c.classList.remove('active');
+      });
+      /* Set this card active */
+      card.classList.add('active');
+
+      /* Update brand state */
+      activeBrand = card.getAttribute('data-filter-brand') || 'all';
+
+      /* Sync the text filter buttons inside the cars section */
+      var brandBtns = document.querySelectorAll('#brandFilters .brand-btn');
+      brandBtns.forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-brand') === activeBrand);
+      });
+
+      /* Re-render cars */
+      renderCars();
+
+      /* Smooth scroll to cars section */
+      var sec = document.getElementById('cars');
+      if (sec) {
+        setTimeout(function() {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+    });
+  });
+}
+
+/* ── Modal ───────────────────────────────────────────────── */
 function openModal(id) {
   var car = CARS.filter(function(c){return c.id===id;})[0];
   if (!car) return;
@@ -360,7 +414,7 @@ function openModal(id) {
 }
 
 function buildModalHTML(car) {
-  var imgs  = (car.images && car.images.length) ? car.images : [''];
+  var imgs  = (car.images && car.images.length) ? car.images.filter(Boolean) : [''];
   var specs = localSpecs(car);
   var badge = tBadge(car.badge);
 
@@ -413,7 +467,7 @@ function buildModalHTML(car) {
 }
 
 function bindModalEvents(car) {
-  var imgs = (car.images && car.images.length) ? car.images : [''];
+  var imgs = (car.images && car.images.length) ? car.images.filter(Boolean) : [''];
   function goTo(idx) {
     modalGalleryIdx = (idx+imgs.length)%imgs.length;
     galleryState[car.id] = modalGalleryIdx;
@@ -450,23 +504,20 @@ function closeModal() {
   document.body.style.overflow='';
 }
 
-/* ── Order scroll ───────────────────────────────────────────── */
+/* ── Order scroll ────────────────────────────────────────── */
 function scrollToOrder(name) {
   selectedCarName = name;
-
   var s = document.getElementById('contact');
   if (s) s.scrollIntoView({behavior:'smooth',block:'start'});
-
   var noteEl   = document.getElementById('orderNote');
   var noteText = document.getElementById('orderNoteText');
-
   if (noteEl && noteText && name) {
     noteText.textContent = (currentLang==='ar'?'طلب: ':'Ordering: ')+name;
     noteEl.hidden = false;
   }
 }
 
-/* ── Filters & search ───────────────────────────────────────── */
+/* ── Filters & search ────────────────────────────────────── */
 function initFilters() {
   document.querySelectorAll('.filter-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -486,7 +537,7 @@ function initFilters() {
   }
 }
 
-/* ── Theme ──────────────────────────────────────────────────── */
+/* ── Theme ───────────────────────────────────────────────── */
 function initThemeToggle() {
   var btn = document.getElementById('themeToggle');
   if (!btn) return;
@@ -502,7 +553,7 @@ function initThemeToggle() {
   });
 }
 
-/* ── Language ───────────────────────────────────────────────── */
+/* ── Language ────────────────────────────────────────────── */
 function initLangToggle() {
   var btn = document.getElementById('langToggle');
   if (!btn) return;
@@ -521,7 +572,7 @@ function initLangToggle() {
   });
 }
 
-/* ── Navbar ─────────────────────────────────────────────────── */
+/* ── Navbar ──────────────────────────────────────────────── */
 function initNavbar() {
   var navbar    = document.getElementById('navbar');
   var hamburger = document.getElementById('hamburger');
@@ -553,7 +604,7 @@ function initNavbar() {
   }
 }
 
-/* ── Modal init ─────────────────────────────────────────────── */
+/* ── Modal init ──────────────────────────────────────────── */
 function initModal() {
   var closeBtn = document.getElementById('modalClose');
   var overlay  = document.getElementById('modalOverlay');
@@ -562,7 +613,7 @@ function initModal() {
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 }
 
-/* ── Reveal ─────────────────────────────────────────────────── */
+/* ── Reveal on scroll ────────────────────────────────────── */
 function observeReveal() {
   if (typeof IntersectionObserver === 'undefined') {
     document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');}); return;
@@ -574,18 +625,15 @@ function observeReveal() {
   },{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 }
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
-/* ── Contact form ───────────────────────────────────────────── */
+
+/* ── Contact form ────────────────────────────────────────── */
 function initContactForm() {
-  
   var form = document.getElementById('contactForm');
   if (!form) return;
   var success = document.getElementById('formSuccess');
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    console.log("clicked")
-
     var fn = document.getElementById('ffirstname');
     var ln = document.getElementById('flastname');
     var wi = document.getElementById('fwilaya');
@@ -602,69 +650,43 @@ function initContactForm() {
       sbtn.disabled = true;
     }
 
-  var selectedCar = selectedCarName || 'No car selected';
+    var selectedCar = selectedCarName || 'No car selected';
+    var data = {
+      name: fn.value.trim() + ' ' + ln.value.trim(),
+      number: ph.value.trim(),
+      message: 'Wilaya: ' + wi.value + ' | Car: ' + selectedCar
+    };
 
-var data = {
-  name: fn.value.trim() + ' ' + ln.value.trim(),
-  number: ph.value.trim(),
-  message: 'Wilaya: ' + wi.value + ' | Car: ' + selectedCar
-};
-
-fetch('https://vercel-api-eight-orcin.vercel.app/book-ticket', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-.then(function(response) {
-  if (!response.ok) {
-    return response.json().then(function(err) {
-      throw new Error(err.error || 'Request failed');
+    fetch('https://vercel-api-eight-orcin.vercel.app/book-ticket', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        return response.json().then(function(err) { throw new Error(err.error || 'Request failed'); });
+      }
+      return response.json();
+    })
+    .then(function(res) {
+      console.log(res);
+      if (success) { success.textContent = t('form.success'); success.hidden = false; }
+      form.reset();
+      var note = document.getElementById('orderNote');
+      if (note) note.hidden = true;
+      selectedCarName = '';
+      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
+      setTimeout(function() { if (success) success.hidden = true; }, 5000);
+    })
+    .catch(function(err) {
+      console.error(err);
+      alert(currentLang === 'ar' ? 'حدث خطأ: ' + err.message : 'Error: ' + err.message);
+      if (sbtn) { sbtn.textContent = t('form.submit'); sbtn.disabled = false; }
     });
-  }
-
-  return response.json();
-})
-.then(function(res) {
-  console.log(res);
-
-  if (success) {
-    success.textContent = t('form.success');
-    success.hidden = false;
-  }
-
-  form.reset();
-
-  var note = document.getElementById('orderNote');
-  if (note) note.hidden = true;
-
-  if (sbtn) {
-    sbtn.textContent = t('form.submit');
-    sbtn.disabled = false;
-  }
-
-  setTimeout(function() {
-    if (success) success.hidden = true;
-  }, 5000);
-})
-.catch(function(err) {
-  console.error(err);
-
-  alert(
-    currentLang === 'ar'
-      ? 'حدث خطأ: ' + err.message
-      : 'Error: ' + err.message
-  );
-
-  if (sbtn) {
-    sbtn.textContent = t('form.submit');
-    sbtn.disabled = false;
-  }
-});
   });
 }
-/* ── Smooth scroll ──────────────────────────────────────────── */
+
+/* ── Smooth scroll ───────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click',function(e){
@@ -674,16 +696,17 @@ function initSmoothScroll() {
   });
 }
 
-/* ── Boot ───────────────────────────────────────────────────── */
+/* ── Boot ────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
-  try{renderBrandFilters();}catch(e){console.error('brandFilters:',e);}
-  try{renderCars();}        catch(e){console.error('renderCars:',e);}
-  try{initFilters();}       catch(e){console.error('initFilters:',e);}
-  try{initThemeToggle();}   catch(e){console.error('initTheme:',e);}
-  try{initLangToggle();}    catch(e){console.error('initLang:',e);}
-  try{initNavbar();}        catch(e){console.error('initNavbar:',e);}
-  try{initModal();}         catch(e){console.error('initModal:',e);}
-  try{initContactForm();}   catch(e){console.error('initForm:',e);}
-  try{initSmoothScroll();}  catch(e){console.error('initScroll:',e);}
-  try{observeReveal();}     catch(e){console.error('reveal:',e);}
+  try{ initBrandLogoGrid(); }catch(e){ console.error('brandLogoGrid:',e); }
+  try{ renderBrandFilters();}catch(e){ console.error('brandFilters:',e); }
+  try{ renderCars();        }catch(e){ console.error('renderCars:',e); }
+  try{ initFilters();       }catch(e){ console.error('initFilters:',e); }
+  try{ initThemeToggle();   }catch(e){ console.error('initTheme:',e); }
+  try{ initLangToggle();    }catch(e){ console.error('initLang:',e); }
+  try{ initNavbar();        }catch(e){ console.error('initNavbar:',e); }
+  try{ initModal();         }catch(e){ console.error('initModal:',e); }
+  try{ initContactForm();   }catch(e){ console.error('initForm:',e); }
+  try{ initSmoothScroll();  }catch(e){ console.error('initScroll:',e); }
+  try{ observeReveal();     }catch(e){ console.error('reveal:',e); }
 });
