@@ -109,17 +109,17 @@ var CAR_AR = {
 
 var BRANDS = [
   {key:'all',label:'All',labelAr:'الكل'},
-  {key:'Volkswagen',label:'Volkswagen',labelAr:'فولكس واغن'},
-  {key:'MG',label:'MG',labelAr:'MG'},
-  {key:'Livan',label:'Livan',labelAr:'ليفان'},
-  {key:'Skoda',label:'Skoda',labelAr:'سكودا'},
-  {key:'Opel',label:'Opel',labelAr:'أوبل'},
-  {key:'Geely',label:'Geely',labelAr:'جيلي'},
-  {key:'Jetour',label:'Jetour',labelAr:'جيتور'},
-  {key:'Kia',label:'Kia',labelAr:'كيا'},
-  {key:'Changan',label:'Changan',labelAr:'شانجان'},
-  {key:'Roewe',label:'Roewe',labelAr:'رووي'},
-  {key:'Jetta',label:'Jetta',labelAr:'جيتا'}
+  {key:'volkswagen',label:'Volkswagen',labelAr:'فولكس واغن'},
+  {key:'mg',label:'MG',labelAr:'MG'},
+  {key:'livan',label:'Livan',labelAr:'ليفان'},
+  {key:'skoda',label:'Skoda',labelAr:'سكودا'},
+  {key:'opel',label:'Opel',labelAr:'أوبل'},
+  {key:'geely',label:'Geely',labelAr:'جيلي'},
+  {key:'jetour',label:'Jetour',labelAr:'جيتور'},
+  {key:'kia',label:'Kia',labelAr:'كيا'},
+  {key:'changan',label:'Changan',labelAr:'شانجان'},
+  {key:'roewe',label:'Roewe',labelAr:'رووي'},
+  {key:'jetta',label:'Jetta',labelAr:'جيتا'}
 ];
 
 /* ── Cars loaded from Supabase ───────────────────────────── */
@@ -182,11 +182,11 @@ function localSpecs(car) {
   return o;
 }
 
-/* ── Filter ──────────────────────────────────────────────── */
+/* ── Filter — FIXED: case-insensitive brand comparison ────── */
 function getFiltered() {
   return CARS.filter(function(car) {
-    var okCat   = activeFilter === 'all' || car.category === activeFilter;
-    var okBrand = activeBrand  === 'all' || car.brand    === activeBrand;
+    var okCat   = activeFilter === 'all' || (car.category||'').toLowerCase() === activeFilter.toLowerCase();
+    var okBrand = activeBrand  === 'all' || (car.brand||'').toLowerCase()    === activeBrand.toLowerCase();
     var q       = searchQuery.toLowerCase();
     var okQ     = !q || (car.name||'').toLowerCase().indexOf(q) > -1
                      || (car.brand||'').toLowerCase().indexOf(q) > -1
@@ -292,20 +292,20 @@ function renderCars() {
   });
 }
 
-/* ── Brand filters ───────────────────────────────────────── */
+/* ── Brand filters — FIXED: case-insensitive ─────────────── */
 function renderBrandFilters() {
   var c = document.getElementById('brandFilters');
   if (!c) return;
   var avail = {};
-  CARS.forEach(function(car){ avail[car.brand]=true; });
-  c.innerHTML = BRANDS.filter(function(b){ return b.key==='all'||avail[b.key]; })
+  CARS.forEach(function(car){ avail[(car.brand||'').toLowerCase()]=true; });
+  c.innerHTML = BRANDS.filter(function(b){ return b.key==='all'||avail[b.key.toLowerCase()]; })
     .map(function(b){
-      return '<button class="brand-btn'+(activeBrand===b.key?' active':'')
+      return '<button class="brand-btn'+(activeBrand.toLowerCase()===b.key.toLowerCase()?' active':'')
         +'" data-brand="'+b.key+'">'+(currentLang==='ar'?b.labelAr:b.label)+'</button>';
     }).join('');
   c.querySelectorAll('.brand-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      activeBrand = btn.getAttribute('data-brand');
+      activeBrand = (btn.getAttribute('data-brand') || 'all').toLowerCase();
       c.querySelectorAll('.brand-btn').forEach(function(b){b.classList.remove('active');});
       btn.classList.add('active');
       syncLogoGrid();
@@ -314,15 +314,17 @@ function renderBrandFilters() {
   });
 }
 
+/* ── Sync logo grid — FIXED: case-insensitive ────────────── */
 function syncLogoGrid() {
   var grid = document.getElementById('brandLogoGrid');
   if (!grid) return;
   grid.querySelectorAll('.brand-logo-card').forEach(function(card) {
-    var brand = card.getAttribute('data-filter-brand') || 'all';
-    card.classList.toggle('active', brand === activeBrand);
+    var brand = (card.getAttribute('data-filter-brand') || 'all').toLowerCase();
+    card.classList.toggle('active', brand === activeBrand.toLowerCase());
   });
 }
 
+/* ── Brand Logo Grid — FIXED: case-insensitive ───────────── */
 function initBrandLogoGrid() {
   var grid = document.getElementById('brandLogoGrid');
   if (!grid) return;
@@ -330,10 +332,18 @@ function initBrandLogoGrid() {
     card.addEventListener('click', function() {
       grid.querySelectorAll('.brand-logo-card').forEach(function(c){ c.classList.remove('active'); });
       card.classList.add('active');
-      activeBrand = card.getAttribute('data-filter-brand') || 'all';
+
+      /* Store activeBrand as lowercase so comparison always works */
+      activeBrand = (card.getAttribute('data-filter-brand') || 'all').toLowerCase();
+
+      /* Sync the text filter buttons */
       var brandBtns = document.querySelectorAll('#brandFilters .brand-btn');
-      brandBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-brand')===activeBrand); });
+      brandBtns.forEach(function(b){
+        b.classList.toggle('active', (b.getAttribute('data-brand')||'all').toLowerCase() === activeBrand);
+      });
+
       renderCars();
+
       var sec = document.getElementById('cars');
       if (sec) setTimeout(function(){ sec.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
     });
@@ -620,12 +630,11 @@ function initSmoothScroll() {
   });
 }
 
-/* ── Boot — load cars from Supabase then init everything ─── */
+/* ── Boot ────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
   var savedLang = localStorage.getItem('geostar-lang');
   if (savedLang) currentLang = savedLang;
 
-  /* Show loading state */
   var grid = document.getElementById('carsGrid');
   if (grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)">Loading cars…</div>';
 
