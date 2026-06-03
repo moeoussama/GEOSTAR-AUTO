@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEOSTAR — Véhicules d'Occasion</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="used-cars.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="logo3.png" alt="GEOSTAR" class="nav-logo-img" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"         class="nav-link" data-i18n="nav.home">Home</a></li>
+        <li><a href="index.html#cars"    class="nav-link" data-i18n="nav.order">Order</a></li>
+        <li><a href="showroom.html"      class="nav-link" data-i18n="nav.showroom">Showroom</a></li>
+        <li><a href="used-cars.html"     class="nav-link active" data-i18n="nav.used">Used Cars</a></li>
+        <li><a href="index.html#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+          <span class="lang-icon">EN</span>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">☽</span>
+        </button>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="used-hero">
+    <div class="used-hero-bg">
+      <div class="hero-grid-overlay"></div>
+      <div class="used-hero-gradient"></div>
+    </div>
+    <div class="used-hero-content">
+      <div class="used-hero-eyebrow fade-up">
+        <span class="eyebrow-line"></span>
+        <span data-i18n="used.eyebrow">Certified Pre-Owned</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="used-hero-title fade-up delay-1" data-i18n="used.title">
+        Véhicules <em>d'Occasion</em>
+      </h1>
+      <p class="used-hero-sub fade-up delay-2" data-i18n="used.sub">
+        Sélection de véhicules de moins de 3 ans, inspectés et garantis.
+        Qualité premium à prix compétitif — disponibles immédiatement à notre showroom.
+      </p>
+      <!-- Stats strip -->
+      <div class="used-hero-stats fade-up delay-3">
+        <div class="used-hero-stat">
+          <span class="used-hero-stat-num" data-i18n="used.stat1.num">–3 ans</span>
+          <span class="used-hero-stat-label" data-i18n="used.stat1.label">Âge maximum</span>
+        </div>
+        <div class="used-hero-stat-sep"></div>
+        <div class="used-hero-stat">
+          <span class="used-hero-stat-num" data-i18n="used.stat2.num">100%</span>
+          <span class="used-hero-stat-label" data-i18n="used.stat2.label">Inspectés</span>
+        </div>
+        <div class="used-hero-stat-sep"></div>
+        <div class="used-hero-stat">
+          <span class="used-hero-stat-num" data-i18n="used.stat3.num">Stock</span>
+          <span class="used-hero-stat-label" data-i18n="used.stat3.label">Disponible maintenant</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FILTER BAR ===== -->
+  <div class="used-filter-bar">
+    <div class="used-filter-inner">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="usedSearch" placeholder="Rechercher un véhicule…"
+               data-i18n-placeholder="used.search" />
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-used-filter="all"       data-i18n="filter.all">All</button>
+        <button class="filter-btn"        data-used-filter="available" data-i18n="showroom.filter.available">Available</button>
+        <button class="filter-btn"        data-used-filter="reserved"  data-i18n="showroom.filter.reserved">Reserved</button>
+        <button class="filter-btn"        data-used-filter="suv"       data-i18n="filter.suv">SUV</button>
+        <button class="filter-btn"        data-used-filter="sedan"     data-i18n="filter.sedan">Sedan</button>
+        <button class="filter-btn"        data-used-filter="hatchback" data-i18n="filter.hatchback">Hatchback</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CARS GRID ===== -->
+  <section class="used-section">
+    <div class="used-grid" id="usedGrid"></div>
+    <p class="no-results" id="usedNoResults" hidden data-i18n="search.noresults">No vehicles match your search.</p>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <div class="used-cta-banner">
+    <div class="used-cta-inner">
+      <div>
+        <p class="used-cta-title" data-i18n="used.cta.title">Looking for a new car to order?</p>
+        <p class="used-cta-sub" data-i18n="used.cta.sub">Browse our full catalogue of new vehicles available for order with competitive prices.</p>
+      </div>
+      <a href="index.html#cars" class="btn btn-primary" data-i18n="used.cta.btn">View New Cars</a>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo3.png" alt="GEOSTAR" class="footer-logo-img" />
+      </div>
+      <p class="footer-tagline" data-i18n="footer.tagline">Driving Excellence Since 2013</p>
+      <div class="footer-links">
+        <a href="index.html"         data-i18n="nav.home">Home</a>
+        <a href="showroom.html"      data-i18n="nav.showroom">Showroom</a>
+        <a href="used-cars.html"     data-i18n="nav.used">Used Cars</a>
+        <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 GEOSTAR AUTO Showroom. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="used-cars.js"></script>
+</body>
+</html>

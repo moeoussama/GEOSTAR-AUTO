@@ -86,6 +86,7 @@ input,textarea,select{font:inherit}img{display:block;max-width:100%}
 .section-pill{display:inline-block;padding:.2rem .65rem;border-radius:4px;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .section-order{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid var(--border-g)}
 .section-showroom{background:rgba(76,175,125,.1);color:var(--green);border:1px solid rgba(76,175,125,.25)}
+.section-used{background:rgba(232,168,56,.1);color:#e8a838;border:1px solid rgba(232,168,56,.3)}
 .actions-cell{display:flex;gap:.4rem;align-items:center}
 .empty-state{padding:3rem;text-align:center;color:var(--muted)}
 .empty-state-icon{font-size:2.5rem;margin-bottom:.75rem}
@@ -191,6 +192,7 @@ input,textarea,select{font:inherit}img{display:block;max-width:100%}
     <span class="nav-section">Cars</span>
     <div class="nav-item" data-page="order-cars"><span class="nav-icon">🚗</span> Order Cars<span class="nav-badge" id="orderCount">0</span></div>
     <div class="nav-item" data-page="showroom-cars"><span class="nav-icon">🏪</span> Showroom Stock<span class="nav-badge" id="showroomCount">0</span></div>
+    <div class="nav-item" data-page="used-cars"><span class="nav-icon">🔑</span> Used Cars<span class="nav-badge" id="usedCount">0</span></div>
     <span class="nav-section">Settings</span>
     <div class="nav-item" data-page="settings"><span class="nav-icon">⚙</span> Settings</div>
     <div class="sidebar-footer">
@@ -228,6 +230,7 @@ input,textarea,select{font:inherit}img{display:block;max-width:100%}
           <select class="form-select" id="fSection">
             <option value="order">Order Cars (Main Page)</option>
             <option value="showroom">Showroom Stock</option>
+            <option value="used">Used Cars (–3 ans)</option>
           </select>
         </div>
         <div class="form-group">
@@ -268,11 +271,11 @@ input,textarea,select{font:inherit}img{display:block;max-width:100%}
         </div>
         <div class="form-group">
           <label class="form-label">Mileage</label>
-          <input class="form-input" id="fMileage" placeholder="0 km" />
+          <input class="form-input" id="fMileage" placeholder="35,000 km" />
         </div>
         <div class="form-group">
           <label class="form-label">Badge (optional)</label>
-          <input class="form-input" id="fBadge" placeholder="New Arrival" />
+          <input class="form-input" id="fBadge" placeholder="Certified" />
         </div>
         <div class="form-group full">
           <label class="form-label">Description *</label>
@@ -336,19 +339,18 @@ var ADMIN_USER   = 'admin';
 var ADMIN_PASS   = 'geostar2026';
 var SUPABASE_URL = 'https://xzsddfwilsavipjfnoah.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_bQum6u1FgRS3Vsg_Nh8n0Q_Eb7raDug';
-
 var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* ═══════════════════════════════════
    STATE
 ═══════════════════════════════════ */
-var currentPage  = 'dashboard';
-var editingId    = null;
-var deleteId     = null;
-var features     = [];
-var tableFilter  = 'all';
-var tableSearch  = '';
-var uploadedUrls = [];
+var currentPage    = 'dashboard';
+var editingId      = null;
+var deleteId       = null;
+var features       = [];
+var tableFilter    = 'all';
+var tableSearch    = '';
+var uploadedUrls   = [];
 var currentSection = 'order';
 
 /* ═══════════════════════════════════
@@ -392,8 +394,10 @@ function loadBadgeCounts() {
     if (res.error || !res.data) return;
     var order    = res.data.filter(function(c){return c.section==='order';}).length;
     var showroom = res.data.filter(function(c){return c.section==='showroom';}).length;
+    var used     = res.data.filter(function(c){return c.section==='used';}).length;
     document.getElementById('orderCount').textContent    = order;
     document.getElementById('showroomCount').textContent = showroom;
+    document.getElementById('usedCount').textContent     = used;
   });
 }
 
@@ -405,16 +409,32 @@ function navigateTo(page) {
   document.querySelectorAll('.nav-item').forEach(function(el){el.classList.remove('active');});
   var activeEl = document.querySelector('.nav-item[data-page="'+page+'"]');
   if (activeEl) activeEl.classList.add('active');
+
   var addBtn = document.getElementById('topAddBtn');
-  addBtn.style.display = (page==='order-cars'||page==='showroom-cars') ? 'flex' : 'none';
-  var titles = {dashboard:'Overview','order-cars':'Order Cars','showroom-cars':'Showroom Stock',settings:'Settings'};
-  var subs   = {dashboard:'Your website at a glance','order-cars':'Cars for order on main page','showroom-cars':'Cars in your showroom',settings:'Admin settings'};
+  addBtn.style.display = (page==='order-cars'||page==='showroom-cars'||page==='used-cars') ? 'flex' : 'none';
+
+  var titles = {
+    dashboard:'Overview',
+    'order-cars':'Order Cars',
+    'showroom-cars':'Showroom Stock',
+    'used-cars':'Used Cars',
+    settings:'Settings'
+  };
+  var subs = {
+    dashboard:'Your website at a glance',
+    'order-cars':'Cars available for order on the main page',
+    'showroom-cars':'Cars physically in your showroom',
+    'used-cars':'Pre-owned vehicles — moins de 3 ans',
+    settings:'Admin settings'
+  };
   document.getElementById('pageTitle').textContent    = titles[page]||page;
   document.getElementById('pageSubtitle').textContent = subs[page]||'';
+
   var content = document.getElementById('pageContent');
   if      (page==='dashboard')     renderDashboard(content);
   else if (page==='order-cars')    { currentSection='order';    renderCarsPage(content,'order'); }
   else if (page==='showroom-cars') { currentSection='showroom'; renderCarsPage(content,'showroom'); }
+  else if (page==='used-cars')     { currentSection='used';     renderCarsPage(content,'used'); }
   else if (page==='settings')      renderSettings(content);
 }
 
@@ -424,19 +444,21 @@ function navigateTo(page) {
 function renderDashboard(el) {
   el.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted)">Loading…</div>';
   sb.from('cars').select('*').then(function(res) {
-    var cars = res.data || [];
+    var cars      = res.data || [];
     var total     = cars.length;
     var orderCars = cars.filter(function(c){return c.section==='order';}).length;
     var inStock   = cars.filter(function(c){return c.section==='showroom';}).length;
+    var usedCars  = cars.filter(function(c){return c.section==='used';}).length;
     var available = cars.filter(function(c){return c.status==='available';}).length;
     var reserved  = cars.filter(function(c){return c.status==='reserved';}).length;
     var sold      = cars.filter(function(c){return c.status==='sold';}).length;
+
     el.innerHTML = ''
       +'<div class="stats-row">'
         +'<div class="stat-card"><div class="stat-card-num">'+total+'</div><div class="stat-card-label">Total Cars</div></div>'
         +'<div class="stat-card"><div class="stat-card-num">'+orderCars+'</div><div class="stat-card-label">For Order</div></div>'
         +'<div class="stat-card"><div class="stat-card-num">'+inStock+'</div><div class="stat-card-label">In Showroom</div></div>'
-        +'<div class="stat-card"><div class="stat-card-num">'+available+'</div><div class="stat-card-label">Available</div></div>'
+        +'<div class="stat-card"><div class="stat-card-num">'+usedCars+'</div><div class="stat-card-label">Used Cars</div></div>'
       +'</div>'
       +'<div class="panel">'
         +'<div class="panel-header"><span class="panel-title">Quick Status</span></div>'
@@ -452,6 +474,7 @@ function renderDashboard(el) {
       +'</div>';
   });
 }
+
 function qCard(icon,label,count,color){
   return '<div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.25rem;text-align:center">'
     +'<div style="font-size:1.75rem;margin-bottom:.35rem">'+icon+'</div>'
@@ -465,8 +488,9 @@ function qCard(icon,label,count,color){
 ═══════════════════════════════════ */
 function renderCarsPage(el, section) {
   tableFilter='all'; tableSearch='';
+  var sectionLabel = section==='order' ? 'Order Cars' : section==='showroom' ? 'Showroom Stock' : 'Used Cars';
   el.innerHTML = '<div class="panel">'
-    +'<div class="panel-header"><span class="panel-title">'+(section==='order'?'Order Cars':'Showroom Stock')+'</span></div>'
+    +'<div class="panel-header"><span class="panel-title">'+sectionLabel+'</span></div>'
     +'<div class="toolbar">'
       +'<div class="search-box"><input type="text" id="tableSearch" placeholder="Search cars…" /></div>'
       +'<span class="filter-chip active" data-filter="all">All</span>'
@@ -476,7 +500,9 @@ function renderCarsPage(el, section) {
     +'</div>'
     +'<div id="tableBody"><div style="padding:2rem;text-align:center;color:var(--muted)">Loading…</div></div>'
   +'</div>';
+
   loadAndRefreshTable(section);
+
   document.getElementById('tableSearch').addEventListener('input', function(e){
     tableSearch=e.target.value.toLowerCase(); loadAndRefreshTable(section);
   });
@@ -494,7 +520,9 @@ function loadAndRefreshTable(section) {
   sb.from('cars').select('*').eq('section',section).order('created_at',{ascending:false}).then(function(res){
     var cars = (res.data||[]);
     if (tableFilter!=='all') cars=cars.filter(function(c){return c.status===tableFilter||c.category===tableFilter;});
-    if (tableSearch) cars=cars.filter(function(c){return ((c.brand||'')+(c.name||'')+(c.price||'')+(c.color||'')).toLowerCase().indexOf(tableSearch)>-1;});
+    if (tableSearch) cars=cars.filter(function(c){
+      return ((c.brand||'')+(c.name||'')+(c.price||'')+(c.color||'')).toLowerCase().indexOf(tableSearch)>-1;
+    });
     var tb = document.getElementById('tableBody');
     if (tb) { tb.innerHTML=buildTable(cars,true); bindTableButtons(); }
   });
@@ -521,11 +549,12 @@ function buildTable(cars, showActions) {
       +'<td><span class="section-pill section-'+(car.section||'')+'">'+(car.section||'')+'</span></td>'
       +'<td>'+(car.category||'')+'</td>'
       +'<td>'+(car.year||'—')+'</td>'
+      +(car.mileage?'<td>'+(car.mileage||'')+'</td>':'<td>—</td>')
       +(showActions?'<td>'+actionsHTML+'</td>':'')
     +'</tr>';
   }).join('');
   return '<table class="car-table"><thead><tr>'
-    +'<th>Photo</th><th>Model</th><th>Price</th><th>Status</th><th>Section</th><th>Type</th><th>Year</th>'
+    +'<th>Photo</th><th>Model</th><th>Price</th><th>Status</th><th>Section</th><th>Type</th><th>Year</th><th>Mileage</th>'
     +(showActions?'<th>Actions</th>':'')
     +'</tr></thead><tbody>'+rows+'</tbody></table>';
 }
@@ -540,7 +569,7 @@ function bindTableButtons() {
 }
 
 /* ═══════════════════════════════════
-   IMAGE UPLOAD TO SUPABASE
+   IMAGE UPLOAD
 ═══════════════════════════════════ */
 async function uploadImage(file) {
   var ext      = file.name.split('.').pop();
@@ -555,7 +584,6 @@ document.getElementById('imgFileInput').addEventListener('change', async functio
   if (!files.length) return;
   var prog = document.getElementById('uploadProgress');
   prog.style.display = 'block';
-  prog.textContent = 'Uploading 0 / ' + files.length + ' images…';
   var grid = document.getElementById('imgPreviewGrid');
   for (var i = 0; i < files.length; i++) {
     prog.textContent = 'Uploading ' + (i+1) + ' / ' + files.length + ' images…';
@@ -594,8 +622,9 @@ function openCarModal(id) {
   });
   document.getElementById('fStatus').value   = 'available';
   document.getElementById('fCategory').value = 'suv';
-  document.getElementById('featuresTags').innerHTML = '';
-  document.getElementById('specsEditor').innerHTML  = '';
+  document.getElementById('fSection').value  = currentSection || 'order';
+  document.getElementById('featuresTags').innerHTML  = '';
+  document.getElementById('specsEditor').innerHTML   = '';
   document.getElementById('imgPreviewGrid').innerHTML = '';
   document.getElementById('imgFileInput').value = '';
   document.getElementById('uploadProgress').style.display = 'none';
@@ -604,16 +633,16 @@ function openCarModal(id) {
     sb.from('cars').select('*').eq('id',id).single().then(function(res){
       var car = res.data;
       if (!car) return;
-      document.getElementById('fSection').value   = car.section   || 'order';
-      document.getElementById('fStatus').value    = car.status    || 'available';
-      document.getElementById('fBrand').value     = car.brand     || '';
-      document.getElementById('fName').value      = car.name      || '';
-      document.getElementById('fPrice').value     = car.price     || '';
-      document.getElementById('fCategory').value  = car.category  || 'suv';
-      document.getElementById('fYear').value      = car.year      || '';
-      document.getElementById('fColor').value     = car.color     || '';
-      document.getElementById('fMileage').value   = car.mileage   || '';
-      document.getElementById('fBadge').value     = car.badge     || '';
+      document.getElementById('fSection').value   = car.section    || 'order';
+      document.getElementById('fStatus').value    = car.status     || 'available';
+      document.getElementById('fBrand').value     = car.brand      || '';
+      document.getElementById('fName').value      = car.name       || '';
+      document.getElementById('fPrice').value     = car.price      || '';
+      document.getElementById('fCategory').value  = car.category   || 'suv';
+      document.getElementById('fYear').value      = car.year       || '';
+      document.getElementById('fColor').value     = car.color      || '';
+      document.getElementById('fMileage').value   = car.mileage    || '';
+      document.getElementById('fBadge').value     = car.badge      || '';
       document.getElementById('fDesc').value      = car.description|| '';
       uploadedUrls = parseField(car.images);
       features     = parseField(car.features);
@@ -671,11 +700,13 @@ async function saveCar() {
   var data = {
     section:     document.getElementById('fSection').value,
     status:      document.getElementById('fStatus').value,
-    brand:       brand, name: name, price: price,
+    brand:       brand,
+    name:        name,
+    price:       price,
     category:    document.getElementById('fCategory').value,
     year:        parseInt(document.getElementById('fYear').value)||null,
     color:       document.getElementById('fColor').value.trim(),
-    mileage:     document.getElementById('fMileage').value.trim()||'0 km',
+    mileage:     document.getElementById('fMileage').value.trim()||null,
     badge:       document.getElementById('fBadge').value.trim()||null,
     description: desc,
     images:      JSON.stringify(uploadedUrls),
@@ -766,9 +797,17 @@ function renderSettings(el) {
       +'</div>'
     +'</div>'
     +'<div class="panel" style="max-width:560px;margin-top:1.5rem">'
+      +'<div class="panel-header"><span class="panel-title">Sections Guide</span></div>'
+      +'<div style="padding:1.5rem;display:flex;flex-direction:column;gap:.75rem">'
+        +'<div style="display:flex;gap:.75rem;align-items:center"><span class="section-pill section-order">order</span><span style="font-size:.85rem;color:var(--muted)">Shows on the main page — cars available for ordering</span></div>'
+        +'<div style="display:flex;gap:.75rem;align-items:center"><span class="section-pill section-showroom">showroom</span><span style="font-size:.85rem;color:var(--muted)">Shows on the Showroom page — new cars physically in stock</span></div>'
+        +'<div style="display:flex;gap:.75rem;align-items:center"><span class="section-pill section-used">used</span><span style="font-size:.85rem;color:var(--muted)">Shows on the Used Cars page — pre-owned vehicles (–3 ans)</span></div>'
+      +'</div>'
+    +'</div>'
+    +'<div class="panel" style="max-width:560px;margin-top:1.5rem">'
       +'<div class="panel-header"><span class="panel-title">Change Admin Password</span></div>'
       +'<div style="padding:1.5rem;display:flex;flex-direction:column;gap:1rem">'
-        +'<p style="font-size:.85rem;color:var(--muted);line-height:1.6">To change your password, open <strong style="color:var(--text)">admin.html</strong> in a text editor and update these 2 lines at the top of the script:</p>'
+        +'<p style="font-size:.85rem;color:var(--muted);line-height:1.6">Open <strong style="color:var(--text)">admin.html</strong> in a text editor and update these 2 lines:</p>'
         +'<div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:monospace;font-size:.82rem;color:var(--gold)">'
           +'var ADMIN_USER = \'admin\';<br>'
           +'var ADMIN_PASS = \'geostar2026\';'

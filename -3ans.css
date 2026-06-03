@@ -1,0 +1,543 @@
+/* ============================================================
+   GEOSTAR — used-cars.css
+   Premium used cars page — no green badge, elegant design
+   ============================================================ */
+
+/* ── Hero ────────────────────────────────────────────────── */
+.used-hero {
+  position: relative;
+  min-height: 56vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 8rem 2rem 5rem;
+  text-align: center;
+}
+
+.used-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.used-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 55%, rgba(201,168,76,.08) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(201,168,76,.04) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 55%, var(--bg) 100%);
+}
+
+[data-theme="light"] .used-hero-gradient {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 55%, rgba(201,168,76,.1) 0%, transparent 65%),
+    linear-gradient(180deg, transparent 55%, var(--bg) 100%);
+}
+
+.used-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+/* Eyebrow with lines */
+.used-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp .8s forwards;
+}
+.eyebrow-line {
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.eyebrow-line:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.used-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 6.5vw, 5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  letter-spacing: -.01em;
+}
+.used-hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.used-hero-sub {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.78;
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+}
+
+/* Stats strip */
+.used-hero-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.used-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+}
+.used-hero-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.used-hero-stat-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.used-hero-stat-sep {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+}
+
+/* ── Filter Bar ──────────────────────────────────────────── */
+.used-filter-bar {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  position: sticky;
+  top: 70px;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.used-filter-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.used-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+}
+.used-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+}
+
+/* ── Used Car Card ───────────────────────────────────────── */
+.used-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+}
+.used-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow), var(--shadow-gold);
+  border-color: var(--border);
+}
+
+/* Thin gold top border accent on hover */
+.used-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity var(--trans);
+  z-index: 3;
+}
+.used-card:hover::before { opacity: 1; }
+
+/* ── Image ───────────────────────────────────────────────── */
+.used-image-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: var(--bg-3);
+}
+.used-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .65s cubic-bezier(.4,0,.2,1);
+}
+.used-card:hover .used-image-wrap img { transform: scale(1.05); }
+
+/* Gallery arrows */
+.used-card .gallery-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(11,11,13,.7);
+  border: 1px solid rgba(201,168,76,.3);
+  color: var(--gold);
+  font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity var(--trans), background var(--trans);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+.used-card .gallery-prev { left: 10px; }
+.used-card .gallery-next { right: 10px; }
+.used-card:hover .gallery-arrow { opacity: 1; }
+.used-card .gallery-arrow:hover { background: rgba(201,168,76,.25); border-color: var(--gold); }
+
+.used-card .gallery-dots {
+  position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 5;
+}
+.used-card .gallery-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  transition: all var(--trans);
+}
+.used-card .gallery-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* Car badge (New Arrival etc) */
+.used-car-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 5;
+  background: var(--gold); color: #0b0b0d;
+  font-size: .62rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .25rem .65rem; border-radius: 3px;
+}
+
+/* Year pill on image — replaces the green badge */
+.used-year-pill {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  z-index: 5;
+  background: rgba(11,11,13,.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 20px;
+  padding: .3rem .85rem;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: .08em;
+}
+.used-year-pill-icon { font-size: .8rem; }
+
+/* ── Card Body ───────────────────────────────────────────── */
+.used-body {
+  padding: 1.6rem 1.8rem 1.8rem;
+}
+
+.used-brand {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .63rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .4rem;
+  opacity: .9;
+}
+.used-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .5rem;
+  line-height: 1.12;
+  letter-spacing: -.01em;
+}
+
+/* Tags row (year, km, color) */
+.used-tags {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .9rem;
+  flex-wrap: wrap;
+}
+.used-tag {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-radius: 20px;
+  padding: .22rem .7rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .7rem;
+  color: var(--text-muted);
+}
+.used-tag-icon { font-size: .8rem; }
+
+.used-price {
+  font-family: Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: .85rem;
+  letter-spacing: .01em;
+}
+
+.used-desc {
+  font-size: .855rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Specs mini strip */
+.used-specs-strip {
+  display: flex;
+  gap: .75rem;
+  margin-bottom: 1.35rem;
+  padding: .7rem 1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+.used-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: .08rem;
+  flex: 1;
+  min-width: 55px;
+}
+.used-spec-label {
+  font-size: .58rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.used-spec-value {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Status footer — elegant, no green badge ─────────────── */
+.used-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border-2);
+}
+
+/* Status text — refined, minimal */
+.used-status-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+.used-status-text::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-text-available { color: var(--gold); }
+.status-text-reserved  { color: var(--text-dim); }
+.status-text-sold      { color: var(--text-dim); }
+
+.used-actions {
+  display: flex;
+  gap: .5rem;
+}
+
+.btn-used-contact {
+  padding: .6rem 1.25rem;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #0b0b0d;
+  cursor: pointer;
+  transition: all var(--trans);
+  white-space: nowrap;
+}
+.btn-used-contact:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(201,168,76,.3);
+}
+.btn-used-contact:disabled,
+.btn-used-contact.disabled {
+  background: var(--bg-3);
+  border-color: var(--border-2);
+  color: var(--text-dim);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-used-view {
+  padding: .6rem 1rem;
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--trans);
+  white-space: nowrap;
+}
+.btn-used-view:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+/* Sold overlay */
+.used-card.status-sold .used-image-wrap::after {
+  content: 'VENDU';
+  position: absolute; inset: 0;
+  background: rgba(11,11,13,.62);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.4rem; font-weight: 900;
+  letter-spacing: .3em;
+  color: rgba(255,255,255,.35);
+  z-index: 4;
+}
+
+/* ── CTA Banner ──────────────────────────────────────────── */
+.used-cta-banner {
+  background: var(--bg-3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 3rem 2rem;
+}
+.used-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.used-cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .35rem;
+}
+.used-cta-sub {
+  font-size: .9rem;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.65;
+}
+
+/* ── Arabic ──────────────────────────────────────────────── */
+.lang-ar .used-brand,
+.lang-ar .used-name,
+.lang-ar .used-desc,
+.lang-ar .used-tag,
+.lang-ar .used-spec-label,
+.lang-ar .used-spec-value,
+.lang-ar .used-status-text,
+.lang-ar .btn-used-contact,
+.lang-ar .btn-used-view,
+.lang-ar .used-cta-title,
+.lang-ar .used-cta-sub,
+.lang-ar .used-hero-eyebrow,
+.lang-ar .used-hero-stat-label {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+.lang-ar .used-brand,
+.lang-ar .btn-used-contact,
+.lang-ar .btn-used-view,
+.lang-ar .used-status-text {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .used-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: .85rem;
+  }
+  .used-image-wrap { height: 155px; }
+  .used-body { padding: 1rem 1.1rem 1.2rem; }
+  .used-name { font-size: 1.15rem; }
+  .used-price { font-size: 1rem; }
+  .used-desc { font-size: .78rem; }
+  .used-card-footer { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .used-actions { width: 100%; }
+  .btn-used-contact, .btn-used-view { flex: 1; text-align: center; justify-content: center; }
+  .used-cta-inner { flex-direction: column; text-align: center; }
+  .used-filter-bar { top: 0; }
+  .used-hero-stats { gap: 1rem; padding: .75rem 1.25rem; }
+}
+@media (max-width: 400px) {
+  .used-grid { grid-template-columns: 1fr; }
+}
