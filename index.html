@@ -19,9 +19,7 @@
       </a>
       <ul class="nav-links" id="navLinks">
       <li><a href="#home"       class="nav-link active" data-i18n="nav.home">Home</a></li>
-      <li><a href="#order"       class="nav-link"        data-i18n="nav.order">order</a></li>
-      <li><a href="used-cars.html" class="nav-link" data-i18n="nav.used">Used Cars</a></li>
-      <li><a href="showroom.html" class="nav-link"      data-i18n="nav.showroom">Showroom</a></li>
+      <li><a href="#cars" class="nav-link" data-i18n="nav.order">Order</a></li>
       <li><a href="#contact"    class="nav-link"        data-i18n="nav.contact">Contact</a></li>
        </ul>
       <div class="nav-actions">
@@ -144,6 +142,34 @@
     <div class="cars-grid" id="carsGrid"></div>
     <p class="no-results" id="noResults" hidden data-i18n="search.noresults">No cars match your search.</p>
   </section>
+  <!-- WHY CHOOSE US -->
+<section class="why-section">
+  <div class="why-inner">
+    <h2 class="why-title">لماذا تختار وكالة GEOSTAR؟</h2>
+    <p class="why-sub">نحن نضمن لك تجربة شراء استثنائية ومرافقة كاملة من المعاينة إلى الاستلام</p>
+    <div class="why-grid">
+
+      <div class="why-card">
+        <div class="why-icon">&#128106;</div>
+        <h3 class="why-card-title">فريق مبيعات محترف</h3>
+        <p class="why-card-desc">فريق مبيعات محترف في خدمتكم لمساعدتكم في اختيار السيارة المثالية التي تلي تطلعاتكم وميزانيتكم.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">&#128196;</div>
+        <h3 class="why-card-title">تسهيلات ومرافقة إدارية</h3>
+        <p class="why-card-desc">مرافقة كاملة وتسهيلات سريعة في معالجة الملفات والإجراءات الإدارية لتستلم سيارتك بكل أريحية.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon">&#9733;</div>
+        <h3 class="why-card-title">أفضل الأسعار التنافسية</h3>
+        <p class="why-card-desc">أفضل الأسعار التنافسية المدروسة لتناسب السوق الجزائري وتضمن لك القيمة الحقيقية مقابل السعر.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
   <!-- ===== CONTACT SECTION ===== -->
   <section class="contact-section" id="contact">
@@ -200,18 +226,28 @@
         </div>
 
         <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ffirstname" data-i18n="form.firstname.label">First Name</label>
-              <input type="text" id="ffirstname" placeholder="Ahmed"
-                     data-i18n-placeholder="form.firstname.placeholder" autocomplete="given-name" />
-            </div>
-            <div class="form-group">
-              <label for="flastname" data-i18n="form.lastname.label">Last Name</label>
-              <input type="text" id="flastname" placeholder="Benali"
-                     data-i18n-placeholder="form.lastname.placeholder" autocomplete="family-name" />
-            </div>
-          </div>
+         <div class="form-group">
+  <label for="ffirstname" data-i18n="form.firstname.label">Full Name</label>
+  <input type="text" id="ffirstname" placeholder="Ahmed Benali"
+         autocomplete="name" />
+</div>
+          <div class="form-group">
+  <label for="fcar">السيارة المطلوبة / Voiture souhaitée</label>
+  <select id="fcar" name="car">
+    <option value="">اختر السيارة / Choisir le véhicule…</option>
+    <option>JETTA VS5 FULL OPTION </option>
+    <option> GAC GS3 MIDEDLE ENJOY</option>
+    <option>GAC GS3 FULL OPTION </option>
+    <option>GAC GS3 TYPE R STYLE</option>
+    <option>GEELY COOLRAY BATTLE</option>
+    <option>MG5 MANUAL </option>
+    <option> MG5 AUTOMATIQUE</option>
+    <option> MG3 MANUAL TRANSMISSION </option>
+    <option> LIVAN X3 PRO MANUUAL GREY</option>
+    <option> LIVAN X3 PRO  AUTOMATIQUE</option>
+    <option> KAIYI PRO MANUAL</option>
+  </select>
+</div>
           <div class="form-group">
             <label for="fwilaya" data-i18n="form.wilaya.label">Wilaya of Residence</label>
             <select id="fwilaya">
@@ -273,6 +309,10 @@
   </div>
 
   <!-- ===== FOOTER ===== -->
+  
+    </div>
+  </div>
+</section>
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
