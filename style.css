@@ -614,6 +614,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   gap: 1.75rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 /* ── Car Card ────────────────────────────────────────────── */
 .car-card {
   background: var(--bg-card);
@@ -1151,6 +1154,92 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .contact-link:hover strong {
   color: var(--gold);
+}
+/* ── Why Choose Us ───────────────────────────────────────── */
+.why-section {
+  background: var(--bg-2);
+  padding: 6rem 2rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.why-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.why-title {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .75rem;
+  direction: rtl;
+}
+
+.why-sub {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: .95rem;
+  color: var(--text-muted);
+  margin-bottom: 3.5rem;
+  direction: rtl;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.why-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 1.75rem;
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+  direction: rtl;
+}
+
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow), var(--shadow-gold);
+  border-color: var(--border);
+}
+
+.why-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: rgba(201,168,76,.12);
+  border: 1px solid rgba(201,168,76,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 1.5rem;
+  color: var(--gold);
+}
+
+.why-card-title {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .85rem;
+}
+
+.why-card-desc {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+  font-size: .875rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
