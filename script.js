@@ -4,7 +4,7 @@
 
 var TRANSLATIONS = {
   en: {
-    'nav.home':'Home','nav.cars':'Cars','nav.contact':'Contact',
+    'nav.home':'Home','nav.cars':'Cars','nav.order':'Order','nav.contact':'Contact',
     'hero.eyebrow':'Geostar is the best choice',
     'hero.sub':'The first Algerian website for Chinese car prices in Algeria with competitive prices including shipping costs without customs duties.',
     'hero.cta.fleet':'Explore Fleet','hero.cta.visit':'Book a Visit','hero.scroll':'Scroll',
@@ -29,7 +29,7 @@ var TRANSLATIONS = {
 
   },
   ar: {
-    'nav.home':'الرئيسية','nav.cars':'السيارات','nav.contact':'التواصل',
+    'nav.home':'الرئيسية','nav.cars':'السيارات','nav.order':'اطلب','nav.contact':'التواصل',
     'hero.eyebrow':'جيوستار احسن اختيار',
     'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر  بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
     'hero.cta.fleet':'استعرض الأسطول','hero.cta.visit':'احجز زيارة','hero.scroll':'مرر',
@@ -141,13 +141,13 @@ var CARS = [
   },
   {
     id:5,brand:'GAC',name:'GS3 FULL OPTION',price:'3,350,000 DZD',
-    category:'suv',badge:null,images:['GS3 F OPTION.PNG' , ],
+    category:'suv',badge:null,images:['GAC F OPTION.PNG' , ],
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
    {
     id:6,brand:'GAC',name:'GS3',price:'3,000,000 DZD',
-    category:'suv',badge:null,images:['MEDUIM .PNG',],
+    category:'suv',badge:null,images:['GAC MEDUIM.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
@@ -223,11 +223,13 @@ function localSpecs(car) {
 function getFiltered() {
   return CARS.filter(function(car) {
     var okCat   = activeFilter === 'all' || car.category === activeFilter;
-    var okBrand = activeBrand  === 'all' || car.brand    === activeBrand;
+    var okBrand = activeBrand  === 'all'
+                  || car.brand.toLowerCase() === activeBrand.toLowerCase();
     var q       = searchQuery.toLowerCase();
+    var desc    = car.description || '';
     var okQ     = !q || car.name.toLowerCase().indexOf(q) > -1
                      || car.brand.toLowerCase().indexOf(q) > -1
-                     || car.description.toLowerCase().indexOf(q) > -1;
+                     || desc.toLowerCase().indexOf(q) > -1;
     return okCat && okBrand && okQ;
   });
 }
@@ -325,6 +327,22 @@ function renderCars() {
     });
     card.addEventListener('keydown', function(e) {
       if (e.key==='Enter'||e.key===' ') { e.preventDefault(); openModal(parseInt(card.getAttribute('data-id'))); }
+    });
+  });
+}
+
+/* ── Brand logo grid (static buttons in index.html) ─────────── */
+function initBrandLogoGrid() {
+  var cards = document.querySelectorAll('.brand-logo-card');
+  if (!cards.length) return;
+  cards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      activeBrand = card.getAttribute('data-filter-brand') || 'all';
+      cards.forEach(function(b){ b.classList.remove('active'); });
+      card.classList.add('active');
+      renderCars();
+      var grid = document.getElementById('carsGrid');
+      if (grid) grid.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
 }
@@ -587,11 +605,11 @@ function initContactForm() {
     e.preventDefault();
 
     var fn = document.getElementById('ffirstname');
-    var ln = document.getElementById('flastname');
+    var ca = document.getElementById('fcar');
     var wi = document.getElementById('fwilaya');
     var ph = document.getElementById('fphone');
 
-    if (!fn.value.trim() || !ln.value.trim() || !wi.value || !ph.value.trim()) {
+    if (!fn.value.trim() || !ca.value || !wi.value || !ph.value.trim()) {
       alert(currentLang === 'ar' ? 'يرجى ملء جميع الحقول.' : 'Please fill in all fields.');
       return;
     }
@@ -603,14 +621,15 @@ function initContactForm() {
     }
 
     var data = {
-      first_name: fn.value.trim(),
-      last_name:  ln.value.trim(),
-      wilaya:     wi.value,
-      phone:      ph.value.trim() 
+      full_name: fn.value.trim(),
+      car:       ca.value.trim(),
+      wilaya:    wi.value,
+      phone:     ph.value.trim()
     };
 
-    fetch('PASTE_YOUR_WEB_APP_URL_HERE', {
+    fetch(SHEET_URL, {
       method: 'POST',
+      mode:   'no-cors',
       body:   JSON.stringify(data)
     })
     .then(function() {
@@ -640,6 +659,7 @@ function initSmoothScroll() {
 /* ── Boot ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
   try{renderBrandFilters();}catch(e){console.error('brandFilters:',e);}
+  try{initBrandLogoGrid();} catch(e){console.error('brandLogoGrid:',e);}
   try{renderCars();}        catch(e){console.error('renderCars:',e);}
   try{initFilters();}       catch(e){console.error('initFilters:',e);}
   try{initThemeToggle();}   catch(e){console.error('initTheme:',e);}
