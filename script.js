@@ -594,7 +594,7 @@ function observeReveal() {
   },{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 }
-var API_URL = 'http://localhost:5000/book-ticket';
+var API_URL = 'https://vercel-api-eight-orcin.vercel.app/book-ticket';
 /* ── Contact form ───────────────────────────────────────────── */
 function initContactForm() {
   var form = document.getElementById('contactForm');
