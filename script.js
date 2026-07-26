@@ -594,7 +594,7 @@ function observeReveal() {
   },{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 }
-var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
+var API_URL = 'http://localhost:5000/book-ticket';
 /* ── Contact form ───────────────────────────────────────────── */
 function initContactForm() {
   var form = document.getElementById('contactForm');
@@ -614,23 +614,39 @@ function initContactForm() {
       return;
     }
 
+    /* API expects a phone matching ^(05|06|07)[0-9]{8}$ (no spaces) */
+    var phoneClean = ph.value.replace(/\s+/g, '');
+    if (!/^(05|06|07)[0-9]{8}$/.test(phoneClean)) {
+      alert(currentLang === 'ar'
+        ? 'رقم هاتف غير صالح. استعمل الصيغة: 05/06/07 متبوعة بـ 8 أرقام.'
+        : 'Invalid phone number. Use format: 05/06/07 followed by 8 digits.');
+      return;
+    }
+
     var sbtn = form.querySelector('button[type="submit"]');
     if (sbtn) {
       sbtn.textContent = currentLang === 'ar' ? 'جارٍ الإرسال…' : 'Sending…';
       sbtn.disabled = true;
     }
 
+    /* The API stores name / number / message, so pack car + wilaya into message */
     var data = {
-      full_name: fn.value.trim(),
-      car:       ca.value.trim(),
-      wilaya:    wi.value,
-      phone:     ph.value.trim()
+      name:    fn.value.trim(),
+      number:  phoneClean,
+      message: 'Voiture: ' + ca.value.trim() + ' | Wilaya: ' + wi.value
     };
 
-    fetch(SHEET_URL, {
-      method: 'POST',
-      mode:   'no-cors',
-      body:   JSON.stringify(data)
+    fetch(API_URL, {
+      method:  'POST',
+      mode:    'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(data)
+    })
+    .then(function(res) {
+      return res.json().catch(function(){ return {}; }).then(function(body) {
+        if (!res.ok) { throw new Error(body.error || 'Request failed'); }
+        return body;
+      });
     })
     .then(function() {
       if (success) { success.textContent = t('form.success'); success.hidden = false; }
