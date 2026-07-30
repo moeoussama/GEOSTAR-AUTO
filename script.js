@@ -198,7 +198,13 @@ var CARS = [
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
-    
+    {
+    id:15,brand:'AUDI',name:'AUDI A3 ',price:'6,400,000 DZD',
+    category:'suv',badge:null,images:['A3 .PNG' , ],
+    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
+    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
+  },
+ 
    
  
  
