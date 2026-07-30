@@ -127,18 +127,7 @@ var CARS = [
     specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
-    {
-    id:15,brand:'ROWIE',name:'ROWIE I5 MANUELE',price:'2,150,000 DZD',
-    category:'sedan',badge:'Popular',images:[' ROWIE.PNG'],
-    specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
-   {
-    id:16,brand:'ROWIE',name:'ROWIE I5 AUTO',price:'2,350,000 DZD',
-    category:'sedan',badge:'Popular',images:['ROWIE.PNG '],
-    specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
+   
   {
     id:3,brand:'LIVAN',name:'GX3 PRO AUTO',price:'2,450,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
@@ -198,19 +187,20 @@ var CARS = [
   },
    
    {
-    id:13,brand:'GOLF 8,5',name:'GOLF 8,5',price:'5,500,000 DZD',
+    id:13,brand:'GOLF 8,5',name:'GOLF 8,5',price:'5,300,000 DZD',
     category:'suv',badge:null,images:['golf gray (4).jpg' , ],
+    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
+    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
+  },
+    {
+    id:14,brand:'T ROC',name:'T ROC',price:'5,500,000 DZD',
+    category:'suv',badge:null,images:['t roc(1).jpg' , ],
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
     
    
-   {
-    id:14,brand:'AUDI',name:'AUDI A3 ',price:'6,400,000 DZD',
-    category:'suv',badge:null,images:['A3 .PNG' , ],
-    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–160 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
-    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
-  },
+ 
  
 ];
  
