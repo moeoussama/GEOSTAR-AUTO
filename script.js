@@ -139,13 +139,14 @@ var CARS = [
     specs:{Engine:'1.5 — 113 hp',Transmission:'MANUELE (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
-  {
-    id:4,brand:'GAC',name:'GS3 R STYLE',price:'3,450,000 DZD',
-    category:'suv',badge:'New Arrival',images:[ 'GAC R STYLE.PNG',],
-    specs:{Engine:'1.5— 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol (Turbo)','0–100 km/h':'9.5 seconds','Top Speed':'195 km/h','Fuel Eco':'6.5 L/100km'},
-    features:['Panoramic Sunroof','12" Central Screen','360° Camera','Electric Seats','ABS + ESP','Hill Descent Control','Auto LED Headlights','Voice Control','TPMS']
+   {
+    id:11,brand:'GEELY',name:'COLRAY BINYU MANUELE',price:'2,600,000 DZD',
+    category:'suv',badge:null,images:['BINYU.PNG',],
+    specs:{Engine:'1.5   — 127 hp',Transmission:'5 MANUELE','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['','','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
-  {
+ 
+   {
     id:5,brand:'GAC',name:'GS3 FULL OPTION',price:'3,350,000 DZD',
     category:'suv',badge:null,images:['GAC F OPTION.PNG' , ],
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
@@ -178,22 +179,25 @@ var CARS = [
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
     {
-    id:9,brand:'GEELY',name:'COLRAY  BATTTLE',price:'3,520,000 DZD',
+    id:10,brand:'GEELY',name:'COLRAY  BATTTLE',price:'3,520,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
-    {
-    id:9,brand:'GEELY',name:'COLRAY BINYU MANUELE',price:'2,600,000 DZD',
-    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
-    specs:{Engine:'1.5   — 127 hp',Transmission:'5 MANUELE','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['','','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+   
+   {
+    id:13,brand:'GOLF 8,5',name:'GS3 FULL OPTION',price:'3,350,000 DZD',
+    category:'suv',badge:null,images:['golf gray (4).jpg' , ],
+    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
+    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
-    {
-    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,550,000 DZD',
-    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
-    specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+    
+   
+   {
+    id:14,brand:'AUDI',name:'AUDI A3 ',price:'6,400,000 DZD',
+    category:'suv',badge:null,images:['BINYU.PNG' , ],
+    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
+    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
  
 ];
