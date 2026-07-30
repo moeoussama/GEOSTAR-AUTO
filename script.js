@@ -127,6 +127,18 @@ var CARS = [
     specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
+    {
+    id:15,brand:'ROWIE',name:'ROWIE I5 MANUELE',price:'2,150,000 DZD',
+    category:'sedan',badge:'Popular',images:[' '],
+    specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
+    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
+  },
+   {
+    id:16,brand:'ROWIE',name:'ROWIE I5 AUTO',price:'2,350,000 DZD',
+    category:'sedan',badge:'Popular',images:[' '],
+    specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
+    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
+  },
   {
     id:3,brand:'LIVAN',name:'GX3 PRO AUTO',price:'2,450,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
