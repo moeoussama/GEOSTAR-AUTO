@@ -128,13 +128,19 @@ var CARS = [
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
   {
-    id:3,brand:'LIVAN',name:'GX3 PRO',price:'2,560,000 DZD',
+    id:3,brand:'LIVAN',name:'GX3 PRO AUTO',price:'2,450,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
     specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
+    {
+    id:3,brand:'LIVAN',name:'GX3 PRO MANUELE',price:'2,350,000 DZD',
+    category:'sedan',badge:'Popular',images:['LIVV.PNG'],
+    specs:{Engine:'1.5 — 113 hp',Transmission:'MANUELE (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
+    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
+  },
   {
-    id:4,brand:'GAC',name:'GS3 R STYLE',price:'3,150,000 DZD',
+    id:4,brand:'GAC',name:'GS3 R STYLE',price:'3,450,000 DZD',
     category:'suv',badge:'New Arrival',images:[ 'GAC R STYLE.PNG',],
     specs:{Engine:'1.5— 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol (Turbo)','0–100 km/h':'9.5 seconds','Top Speed':'195 km/h','Fuel Eco':'6.5 L/100km'},
     features:['Panoramic Sunroof','12" Central Screen','360° Camera','Electric Seats','ABS + ESP','Hill Descent Control','Auto LED Headlights','Voice Control','TPMS']
