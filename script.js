@@ -159,13 +159,31 @@ var CARS = [
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
   {
-    id:8,brand:'JETTA',name:'VS5',price:'4,000,000 DZD',
+    id:8,brand:'JETTA',name:'VS5',price:'4,050,000 DZD',
     category:'suv',badge:'Popular',images:['JETTA VS5.PNG'],
     specs:{Engine:'1.4  — 160 hp',Transmission:'','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
  
    {
+    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,400,000 DZD',
+    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
+    specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+  },
+    {
+    id:9,brand:'GEELY',name:'COLRAY  BATTTLE',price:'3,520,000 DZD',
+    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
+    specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+  },
+    {
+    id:9,brand:'GEELY',name:'COLRAY BINYU MANUELE',price:'2,600,000 DZD',
+    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
+    specs:{Engine:'1.5   — 127 hp',Transmission:'5 MANUELE','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['','','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+  },
+    {
     id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,550,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
