@@ -122,13 +122,13 @@ var CARS = [
     features:['Digital Cockpit Pro','LED Matrix Headlights','ABS + ESC','Adaptive Cruise Control','Lane Assist','Park Assist','Wireless CarPlay','Heated Seats','Rear-View Camera','Travel Assist']
   },
   {
-    id:2,brand:'MG',name:'MG 5',price:'2,490,000 DZD',
+    id:2,brand:'MG',name:'MG 5 MANUELE',price:'2,380,000 DZD',
     category:'sedan',badge:'Value Pick',images:['MG MANUELE .PNG' ],
     specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
     {
-    id:2,brand:'MG',name:'MG 5',price:'2,490,000 DZD',
+    id:2,brand:'MG',name:'MG 5 AUTO',price:'2,480,000 DZD',
     category:'sedan',badge:'Value Pick',images:['MG MANUELE .PNG' ],
     specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
@@ -166,7 +166,7 @@ var CARS = [
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
    {
-    id:6,brand:'GAC',name:'GS3',price:'3,000,000 DZD',
+    id:6,brand:'GAC',name:'GS3',price:'3,500,000 DZD',
     category:'suv',badge:null,images:['GAC R STYLE.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
@@ -199,7 +199,7 @@ var CARS = [
   },
    
    {
-    id:13,brand:'GOLF 8,5',name:'GOLF 8,5',price:'5,300,000 DZD',
+    id:13,brand:'GOLF 8,5',name:'GOLF 8,5',price:'5,500,000 DZD',
     category:'suv',badge:null,images:['golf gray (4).jpg' , ],
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
