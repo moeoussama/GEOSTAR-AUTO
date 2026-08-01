@@ -127,6 +127,12 @@ var CARS = [
     specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
     features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
   },
+    {
+    id:2,brand:'MG',name:'MG 5',price:'2,490,000 DZD',
+    category:'sedan',badge:'Value Pick',images:['MG MANUELE .PNG' ],
+    specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
+    features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
+  },
    
   {
     id:3,brand:'LIVAN',name:'GX3 PRO AUTO',price:'2,450,000 DZD',
@@ -156,6 +162,12 @@ var CARS = [
    {
     id:6,brand:'GAC',name:'GS3',price:'3,000,000 DZD',
     category:'suv',badge:null,images:['GAC MEDUIM.PNG',],
+    specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
+    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
+  },
+   {
+    id:6,brand:'GAC',name:'GS3',price:'3,000,000 DZD',
+    category:'suv',badge:null,images:['GAC R STYLE.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
