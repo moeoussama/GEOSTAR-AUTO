@@ -160,13 +160,13 @@ var CARS = [
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
    {
-    id:6,brand:'GAC',name:'GS3',price:'3,000,000 DZD',
+    id:6,brand:'GAC',name:'GS3 MIDUIM',price:'3,000,000 DZD',
     category:'suv',badge:null,images:['GAC MEDUIM.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
    {
-    id:6,brand:'GAC',name:'GS3',price:'3,500,000 DZD',
+    id:6,brand:'GAC',name:'GS3 R STYLE',price:'3,500,000 DZD',
     category:'suv',badge:null,images:['GAC R STYLE.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
