@@ -141,7 +141,7 @@ var CARS = [
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
     {
-    id:3,brand:'LIVAN',name:'LIVAN X3 PRO MANUELE',price:'2,350,000 DZD',
+    id:3,brand:'LIVAN',name:'LIVAN X3 PRO MANUELE',price:'2,270,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
     specs:{Engine:'1.5 — 113 hp',Transmission:'MANUELE (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
@@ -166,7 +166,7 @@ var CARS = [
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
    {
-    id:6,brand:'GAC',name:' GAC GS3 R STYLE',price:'3,500,000 DZD',
+    id:6,brand:'GAC',name:' GAC GS3 R STYLE',price:'3,450,000 DZD',
     category:'suv',badge:null,images:['GAC R STYLE.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
@@ -186,20 +186,20 @@ var CARS = [
   },
  
    {
-    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,400,000 DZD',
+    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,300,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
     {
-    id:10,brand:'GEELY',name:'COLRAY  BATTLE',price:'3,520,000 DZD',
+    id:10,brand:'GEELY',name:'COLRAY  BATTLE',price:'3,410,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
    
    {
-    id:13,brand:'GOLF 8,5',name:'GOLF 8,5',price:'5,500,000 DZD',
+    id:13,brand:'volkgsvogen',name:'GOLF 8,5',price:'5,430,000 DZD',
     category:'suv',badge:null,images:['golf gray (4).jpg' , ],
     specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
