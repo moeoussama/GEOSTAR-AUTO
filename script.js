@@ -135,19 +135,19 @@ var CARS = [
   },
    
   {
-    id:3,brand:'LIVAN',name:' LIVAN X3 PRO AUTO',price:'2,450,000 DZD',
+    id:3,brand:'LIVAN',name:' LIVAN X3 PRO AUTO',price:'2,400,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
     specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
     {
-    id:3,brand:'LIVAN',name:'LIVAN X3 PRO MANUELE',price:'2,270,000 DZD',
+    id:3,brand:'LIVAN',name:'LIVAN X3 PRO MANUELE',price:'2,230,000 DZD',
     category:'sedan',badge:'Popular',images:['LIVV.PNG'],
     specs:{Engine:'1.5 — 113 hp',Transmission:'MANUELE (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
     features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
   },
    {
-    id:11,brand:'GEELY',name:'COLRAY  MANUELE',price:'2,600,000 DZD',
+    id:11,brand:'GEELY',name:'COLRAY  MANUELE',price:'2,410,000 DZD',
     category:'suv',badge:null,images:['BINYU.PNG',],
     specs:{Engine:'1.5   — 127 hp',Transmission:'5 MANUELE','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['','','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
@@ -160,7 +160,7 @@ var CARS = [
     features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
   },
    {
-    id:6,brand:'GAC',name:' GAC GS3 MIDUIM',price:'3,000,000 DZD',
+    id:6,brand:'GAC',name:' GAC GS3 MIDUIM',price:'2,770,000 DZD',
     category:'suv',badge:null,images:['GAC MEDUIM.PNG',],
     specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
@@ -186,13 +186,13 @@ var CARS = [
   },
  
    {
-    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,300,000 DZD',
+    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,180,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
   },
     {
-    id:10,brand:'GEELY',name:'COLRAY  BATTLE',price:'3,410,000 DZD',
+    id:10,brand:'GEELY',name:'COLRAY  BATTLE',price:'3,220,000 DZD',
     category:'suv',badge:null,images:['COLRAY F OP.PNG',],
     specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
     features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
