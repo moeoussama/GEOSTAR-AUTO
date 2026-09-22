@@ -1,10 +1,16 @@
 /* ============================================================
-   GEOSTAR Car Showroom — script.js  (clean rewrite)
+   GEOSTAR Car Showroom — script.js  (Supabase-powered)
    ============================================================ */
+
+/* ── Supabase config ───────────────────────────────────────── */
+/* Fill these in from Supabase Dashboard → Project Settings → API */
+var SUPABASE_URL      = 'YOUR_SUPABASE_URL';
+var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 var TRANSLATIONS = {
   en: {
-    'nav.home':'Home','nav.cars':'Cars','nav.order':'Order','nav.contact':'Contact',
+    'nav.home':'Home','nav.cars':'Cars','nav.contact':'Contact',
     'hero.eyebrow':'Geostar is the best choice',
     'hero.sub':'The first Algerian website for Chinese car prices in Algeria with competitive prices including shipping costs without customs duties.',
     'hero.cta.fleet':'Explore Fleet','hero.cta.visit':'Book a Visit','hero.scroll':'Scroll',
@@ -25,13 +31,12 @@ var TRANSLATIONS = {
     'form.submit':'Send Message','form.success':'✓ Message sent! We\'ll be in touch shortly.',
     'footer.tagline':'Driving Excellence Since 2013','footer.copy':'© 2026 GEOSTAR AUTO Showroom. All rights reserved.',
     'spec.engine':'Engine','spec.transmission':'Transmission','spec.fuel':'Fuel Type',
-    'spec.acceleration':'0–100 km/h','spec.topspeed':'Top Speed','spec.economy':'Fuel Eco', 
-
+    'spec.acceleration':'0–100 km/h','spec.topspeed':'Top Speed','spec.economy':'Fuel Eco',
   },
   ar: {
-    'nav.home':'الرئيسية','nav.cars':'السيارات','nav.order':'اطلب','nav.contact':'التواصل',
+    'nav.home':'الرئيسية','nav.cars':'السيارات','nav.contact':'التواصل',
     'hero.eyebrow':'جيوستار احسن اختيار',
-    'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر  بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
+    'hero.sub':'اول موقع جزائري لاسعار السيارات الصينيه في الجزائر  بأسعار تنافسية شاملة لتكاليف الشحن بدون جمركة.',
     'hero.cta.fleet':'استعرض الأسطول','hero.cta.visit':'احجز زيارة','hero.scroll':'مرر',
     'stats.models':'موديلات فاخرة','stats.years':'سنوات في الخدمة','stats.clients':'عميل سعيد','stats.rating':'تقييم العملاء',
     'cars.eyebrow':'أسطولنا','cars.title':'المركبات الصينية المتاحة','cars.desc':'موديلات مختارة بعناية توفر الراحة والأداء والأناقة.',
@@ -50,18 +55,18 @@ var TRANSLATIONS = {
     'form.submit':'إرسال الرسالة','form.success':'✓ تم إرسال رسالتك! سنتواصل معك قريباً.',
     'footer.tagline':'نحو التميز في القيادة منذ 2013','footer.copy':'© 2026 معرض جيوستار أوتو. جميع الحقوق محفوظة.',
     'spec.engine':'المحرك','spec.transmission':'ناقل الحركة','spec.fuel':'نوع الوقود',
-    'spec.acceleration':'0–100 كم/س','spec.topspeed':'السرعة القصوى','spec.economy':'استهلاك الوقود' 
+    'spec.acceleration':'0–100 كم/س','spec.topspeed':'السرعة القصوى','spec.economy':'استهلاك الوقود'
   }
 };
 
 var CAR_AR = {
   badges:{'Best Seller':'الأكثر مبيعاً','Value Pick':'أفضل قيمة','New Arrival':'وصل حديثاً','Popular':'الأكثر شعبية'},
- 
+  descriptions:{}, /* car.id -> Arabic description, add here if you want per-car Arabic text */
   specs:{
     'Petrol':'بنزين','Petrol (Turbo)':'بنزين (توربو)','7-speed DSG':'ناقل 7 سرعات DSG',
-    '5-speed Manual / CVT':'5 سرعات يدوي / CVT','7-speed DCT':'ناقل 7 سرعات DCT',
-    '6-speed Manual / 7-speed DSG':'6 يدوي / 7 DSG','7-speed DSG (4MOTION)':'7 DSG رباعي الدفع',
-    '8-speed Automatic':'أوتوماتيك 8 سرعات'
+    'CVT':'ناقل CVT','7-speed DCT':'ناقل 7 سرعات DCT',
+    '6-speed CVT (4MOTION)':'6 سرعات CVT رباعي الدفع','7-speed DSG (4MOTION)':'7 DSG رباعي الدفع',
+    '7-speed Automatic':'أوتوماتيك 7 سرعات'
   },
   features:{
     'Digital Cockpit Pro':'كوكبيت رقمي برو','LED Matrix Headlights':'مصابيح LED ماتريكس',
@@ -104,119 +109,19 @@ var BRANDS = [
   {key:'all',label:'All',labelAr:'الكل'},
   {key:'Volkswagen',label:'Volkswagen',labelAr:'فولكس واغن'},
   {key:'MG',label:'MG',labelAr:'MG'},
-  {key:'Livan',label:'Livan',labelAr:'ليفان'},
+  {key:'LIVAN',label:'Livan',labelAr:'ليفان'},
+  {key:'GAC',label:'GAC',labelAr:'GAC'},
   {key:'Skoda',label:'Skoda',labelAr:'سكودا'},
   {key:'Opel',label:'Opel',labelAr:'أوبل'},
-  {key:'Geely',label:'Geely',labelAr:'جيلي'},
+  {key:'GEELY',label:'Geely',labelAr:'جيلي'},
   {key:'Jetour',label:'Jetour',labelAr:'جيتور'},
   {key:'Changan',label:'Changan',labelAr:'شانجان'},
-  {key:'Roewe',label:'Roewe',labelAr:'رووي'},
-  {key:'Jetta',label:'Jetta',labelAr:'جيتا'}
+  {key:'KAYI',label:'Kayi',labelAr:'كايي'},
+  {key:'JETTA',label:'Jetta',labelAr:'جيتا'}
 ];
 
-var CARS = [
-  {
-    id:1,brand:'MG',name:'MG 3',price:'2,600,000 DZD',
-    category:'sedan',badge:'Best Seller',images:['MG 3 MANUELE.PNG',],
-    specs:{Engine:'1.5  — 109 hp',Transmission:'7-speed DSG','Fuel Type':'Petrol','0–100 km/h':'8.5 seconds','Top Speed':'220 km/h','Fuel Eco':'5.8 L/100km'},
-    features:['Digital Cockpit Pro','LED Matrix Headlights','ABS + ESC','Adaptive Cruise Control','Lane Assist','Park Assist','Wireless CarPlay','Heated Seats','Rear-View Camera','Travel Assist']
-  },
-  {
-    id:2,brand:'MG',name:'MG 5 MANUELE',price:'2,380,000 DZD',
-    category:'sedan',badge:'Value Pick',images:['MG MANUELE .PNG' ],
-    specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
-    features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
-  },
-    {
-    id:2,brand:'MG',name:'MG 5 AUTO',price:'2,480,000 DZD',
-    category:'sedan',badge:'Value Pick',images:['MG MANUELE .PNG' ],
-    specs:{Engine:'1.5  — 120 hp',Transmission:' / CVT','Fuel Type':'Petrol','0–100 km/h':'11.0 seconds','Top Speed':'185 km/h','Fuel Eco':'6.1 L/100km'},
-    features:['10" Touchscreen','Apple CarPlay / Android Auto','ABS + EBD','Front & Rear Sensors','Rear Camera','Keyless Entry','Multi-function Steering Wheel','Electric Windows','Bluetooth Audio']
-  },
-   
-  {
-    id:3,brand:'LIVAN',name:' LIVAN X3 PRO AUTO',price:'2,400,000 DZD',
-    category:'sedan',badge:'Popular',images:['LIVV.PNG'],
-    specs:{Engine:'1.5 — 113 hp',Transmission:'6-speed CVT (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
-    {
-    id:3,brand:'LIVAN',name:'LIVAN X3 PRO MANUELE',price:'2,230,000 DZD',
-    category:'sedan',badge:'Popular',images:['LIVV.PNG'],
-    specs:{Engine:'1.5 — 113 hp',Transmission:'MANUELE (4MOTION)','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
-   {
-    id:11,brand:'GEELY',name:'COLRAY  MANUELE',price:'2,410,000 DZD',
-    category:'suv',badge:null,images:['BINYU.PNG',],
-    specs:{Engine:'1.5   — 127 hp',Transmission:'5 MANUELE','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['','','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  },
- 
-   {
-    id:5,brand:'GAC',name:' GAC GS3 FULL OPTION',price:'3,350,000 DZD',
-    category:'suv',badge:null,images:['GAC F OPTION.PNG' , ],
-    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
-    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
-  },
-   {
-    id:6,brand:'GAC',name:' GAC GS3 MIDUIM',price:'2,770,000 DZD',
-    category:'suv',badge:null,images:['GAC MEDUIM.PNG',],
-    specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  },
-   {
-    id:6,brand:'GAC',name:' GAC GS3 R STYLE',price:'3,450,000 DZD',
-    category:'suv',badge:null,images:['GAC R STYLE.PNG',],
-    specs:{Engine:'15  PureTech Turbo — 177 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  },
-  {
-    id:7,brand:'KAYI',name:'KAYI',price:'2,480,000 DZD',
-    category:'suv',badge:'Popular',images:['KAYI MANUELE.PNG'],
-  
-    specs:{Engine:'1.5 — 116 hp',Transmission:'','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
-  {
-    id:8,brand:'JETTA',name:' JETTA VS5',price:'4,050,000 DZD',
-    category:'suv',badge:'Popular',images:['JETTA VS5.PNG'],
-    specs:{Engine:'1.4  — 160 hp',Transmission:'','Fuel Type':'Petrol','0–100 km/h':'7.8 seconds','Top Speed':'210 km/h','Fuel Eco':'7.2 L/100km'},
-    features:['Active Info Display','Discover Pro Navigation','4MOTION AWD','Dynamic Chassis Control','ACC with Stop & Go','Lane Change Assist','Area View (360°)','Keyless Access','Panoramic Roof','LED Headlights']
-  },
- 
-   {
-    id:9,brand:'GEELY',name:'COLRAY FULL OPTION',price:'3,180,000 DZD',
-    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
-    specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  },
-    {
-    id:10,brand:'GEELY',name:'COLRAY  BATTLE',price:'3,220,000 DZD',
-    category:'suv',badge:null,images:['COLRAY F OP.PNG',],
-    specs:{Engine:'1.5  Turbo — 180 hp',Transmission:'7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'9.2 seconds','Top Speed':'198 km/h','Fuel Eco':'5.9 L/100km'},
-    features:['Pure Panel Digital Cockpit','IntelliLux LED Matrix','ABS + ESP + Hill Assist','Rear Camera + Sensors','Ergonomic AGR Seats','Wireless Smartphone Integration','Traffic Sign Recognition','Driver Attention Alert','Heated Steering Wheel']
-  },
-   
-   {
-    id:13,brand:'volkgsvogen',name:'GOLF 8,5',price:'5,430,000 DZD',
-    category:'suv',badge:null,images:['golf gray (4).jpg' , ],
-    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
-    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
-  },
-  
-    {
-    id:15,brand:'AUDI',name:'AUDI A3 ',price:'6,400,000 DZD',
-    category:'suv',badge:null,images:['A3 .PNG' , ],
-    specs:{Engine:'1.5  — 177 hp',Transmission:' 7-speed Automatic','Fuel Type':'Petrol','0–100 km/h':'10.2 seconds','Top Speed':'195 km/h','Fuel Eco':'5.4 L/100km'},
-    features:['Virtual Cockpit','Amundsen Navigation','ABS + ESC + TCS','Blind Spot Detection','Front Assist (Emergency Braking)','Simply Clever Storage','Climatronic 2-Zone','LED Ambient Lighting','Wireless Charging']
-  },
- 
-   
- 
- 
-];
- 
+/* CARS is now populated live from Supabase — see loadCars() below */
+var CARS = [];
 
 /* ── State ──────────────────────────────────────────────────── */
 var activeFilter    = 'all';
@@ -225,6 +130,43 @@ var searchQuery     = '';
 var currentLang     = 'en';
 var modalGalleryIdx = 0;
 var galleryState    = {};
+
+/* ── Load cars from Supabase ───────────────────────────────── */
+function formatPrice(n) {
+  var num = Number(n);
+  if (isNaN(num)) return n;
+  return num.toLocaleString('en-US') + ' DZD';
+}
+
+async function loadCars() {
+  try {
+    var res = await supabaseClient
+      .from('cars')
+      .select('*')
+      .eq('is_active', true)
+      .order('sort_order', { ascending: true });
+
+    if (res.error) throw res.error;
+
+    CARS = (res.data || []).map(function (row) {
+      return {
+        id: row.id,
+        brand: row.brand,
+        name: row.name,
+        price: formatPrice(row.price_dzd),
+        category: row.category,
+        badge: row.badge,
+        description: row.description || '',
+        images: (row.images && row.images.length) ? row.images : [''],
+        specs: row.specs || {},
+        features: row.features || []
+      };
+    });
+  } catch (e) {
+    console.error('loadCars:', e);
+    CARS = [];
+  }
+}
 
 /* ── i18n ───────────────────────────────────────────────────── */
 function t(key) {
@@ -266,13 +208,11 @@ function localSpecs(car) {
 function getFiltered() {
   return CARS.filter(function(car) {
     var okCat   = activeFilter === 'all' || car.category === activeFilter;
-    var okBrand = activeBrand  === 'all'
-                  || car.brand.toLowerCase() === activeBrand.toLowerCase();
+    var okBrand = activeBrand  === 'all' || car.brand    === activeBrand;
     var q       = searchQuery.toLowerCase();
-    var desc    = car.description || '';
     var okQ     = !q || car.name.toLowerCase().indexOf(q) > -1
                      || car.brand.toLowerCase().indexOf(q) > -1
-                     || desc.toLowerCase().indexOf(q) > -1;
+                     || (car.description||'').toLowerCase().indexOf(q) > -1;
     return okCat && okBrand && okQ;
   });
 }
@@ -324,7 +264,6 @@ function renderCars() {
   if (noRes) { noRes.hidden = filtered.length > 0; if (!noRes.hidden) noRes.textContent = t('search.noresults'); }
   observeReveal();
 
-  /* card gallery arrows */
   grid.querySelectorAll('.gallery-arrow').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -345,7 +284,6 @@ function renderCars() {
     });
   });
 
-  /* View Car button */
   grid.querySelectorAll('.btn-view').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -353,7 +291,6 @@ function renderCars() {
     });
   });
 
-  /* Commander button on card */
   grid.querySelectorAll('.btn-order').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -362,7 +299,6 @@ function renderCars() {
     });
   });
 
-  /* click anywhere on card */
   grid.querySelectorAll('.car-card').forEach(function(card) {
     card.addEventListener('click', function(e) {
       if (e.target.closest('.btn-view')||e.target.closest('.btn-order')||e.target.closest('.gallery-arrow')) return;
@@ -370,22 +306,6 @@ function renderCars() {
     });
     card.addEventListener('keydown', function(e) {
       if (e.key==='Enter'||e.key===' ') { e.preventDefault(); openModal(parseInt(card.getAttribute('data-id'))); }
-    });
-  });
-}
-
-/* ── Brand logo grid (static buttons in index.html) ─────────── */
-function initBrandLogoGrid() {
-  var cards = document.querySelectorAll('.brand-logo-card');
-  if (!cards.length) return;
-  cards.forEach(function(card) {
-    card.addEventListener('click', function() {
-      activeBrand = card.getAttribute('data-filter-brand') || 'all';
-      cards.forEach(function(b){ b.classList.remove('active'); });
-      card.classList.add('active');
-      renderCars();
-      var grid = document.getElementById('carsGrid');
-      if (grid) grid.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
 }
@@ -637,7 +557,8 @@ function observeReveal() {
   },{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 }
-var API_URL = 'https://vercel-api-eight-orcin.vercel.app/book-ticket';
+
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzZ5mme-R4e2bMjh1eAr4DltFc_8bgUYY9rak_845tRrkiIAog6CHXKevSDHXhm-A3Q/exec';
 /* ── Contact form ───────────────────────────────────────────── */
 function initContactForm() {
   var form = document.getElementById('contactForm');
@@ -648,21 +569,11 @@ function initContactForm() {
     e.preventDefault();
 
     var fn = document.getElementById('ffirstname');
-    var ca = document.getElementById('fcar');
     var wi = document.getElementById('fwilaya');
     var ph = document.getElementById('fphone');
 
-    if (!fn.value.trim() || !ca.value || !wi.value || !ph.value.trim()) {
+    if (!fn.value.trim() || !wi.value || !ph.value.trim()) {
       alert(currentLang === 'ar' ? 'يرجى ملء جميع الحقول.' : 'Please fill in all fields.');
-      return;
-    }
-
-    /* API expects a phone matching ^(05|06|07)[0-9]{8}$ (no spaces) */
-    var phoneClean = ph.value.replace(/\s+/g, '');
-    if (!/^(05|06|07)[0-9]{8}$/.test(phoneClean)) {
-      alert(currentLang === 'ar'
-        ? 'رقم هاتف غير صالح. استعمل الصيغة: 05/06/07 متبوعة بـ 8 أرقام.'
-        : 'Invalid phone number. Use format: 05/06/07 followed by 8 digits.');
       return;
     }
 
@@ -672,24 +583,16 @@ function initContactForm() {
       sbtn.disabled = true;
     }
 
-    /* The API stores name / number / message, so pack car + wilaya into message */
     var data = {
-      name:    fn.value.trim(),
-      number:  phoneClean,
-      message: 'Voiture: ' + ca.value.trim() + ' | Wilaya: ' + wi.value
+      first_name: fn.value.trim(),
+      car:        document.getElementById('fcar') ? document.getElementById('fcar').value : '',
+      wilaya:     wi.value,
+      phone:      ph.value.trim()
     };
 
-    fetch(API_URL, {
-      method:  'POST',
-      mode:    'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(data)
-    })
-    .then(function(res) {
-      return res.json().catch(function(){ return {}; }).then(function(body) {
-        if (!res.ok) { throw new Error(body.error || 'Request failed'); }
-        return body;
-      });
+    fetch(SHEET_URL, {
+      method: 'POST',
+      body:   JSON.stringify(data)
     })
     .then(function() {
       if (success) { success.textContent = t('form.success'); success.hidden = false; }
@@ -705,6 +608,7 @@ function initContactForm() {
     });
   });
 }
+
 /* ── Smooth scroll ──────────────────────────────────────────── */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
@@ -717,9 +621,6 @@ function initSmoothScroll() {
 
 /* ── Boot ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function() {
-  try{renderBrandFilters();}catch(e){console.error('brandFilters:',e);}
-  try{initBrandLogoGrid();} catch(e){console.error('brandLogoGrid:',e);}
-  try{renderCars();}        catch(e){console.error('renderCars:',e);}
   try{initFilters();}       catch(e){console.error('initFilters:',e);}
   try{initThemeToggle();}   catch(e){console.error('initTheme:',e);}
   try{initLangToggle();}    catch(e){console.error('initLang:',e);}
@@ -727,5 +628,11 @@ document.addEventListener('DOMContentLoaded', function() {
   try{initModal();}         catch(e){console.error('initModal:',e);}
   try{initContactForm();}   catch(e){console.error('initForm:',e);}
   try{initSmoothScroll();}  catch(e){console.error('initScroll:',e);}
-  try{observeReveal();}     catch(e){console.error('reveal:',e);}
+
+  /* Cars now load live from Supabase, then render */
+  loadCars().then(function () {
+    try{renderBrandFilters();}catch(e){console.error('brandFilters:',e);}
+    try{renderCars();}        catch(e){console.error('renderCars:',e);}
+    try{observeReveal();}     catch(e){console.error('reveal:',e);}
+  });
 });
