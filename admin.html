@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GEOSTAR — Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --gold:#c9a84c; --gold-light:#e8c97a;
+    --bg:#0b0b0d; --bg-2:#111115; --bg-card:#15151b;
+    --border:rgba(201,168,76,.18); --border-2:rgba(255,255,255,.08);
+    --text:#f0ede6; --text-muted:#8a8880; --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'DM Sans',Arial,sans-serif;background:var(--bg);color:var(--text);}
+  .wrap{max-width:1000px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+  h1{font-size:1.4rem;font-weight:700;letter-spacing:.02em;}
+  h2{font-size:1rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin:2rem 0 1rem;}
+  .card{background:var(--bg-card);border:1px solid var(--border-2);border-radius:var(--radius);padding:1.5rem;}
+  label{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem;}
+  input,select,textarea{
+    width:100%;background:var(--bg-2);border:1px solid var(--border-2);border-radius:6px;
+    padding:.6rem .8rem;color:var(--text);font-size:.9rem;margin-bottom:1rem;font-family:inherit;
+  }
+  textarea{min-height:80px;resize:vertical;}
+  button{
+    cursor:pointer;border:none;border-radius:6px;padding:.65rem 1.3rem;font-weight:600;
+    font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;font-family:inherit;
+  }
+  .btn-primary{background:var(--gold);color:#0b0b0d;}
+  .btn-primary:hover{background:var(--gold-light);}
+  .btn-ghost{background:transparent;border:1px solid var(--border-2);color:var(--text);}
+  .btn-danger{background:#c94c4c;color:#fff;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+  @media(max-width:700px){.row,.row3{grid-template-columns:1fr;}}
+  .login-box{max-width:360px;margin:12vh auto;}
+  .car-row{
+    display:flex;align-items:center;gap:1rem;border:1px solid var(--border-2);
+    border-radius:10px;padding:.8rem 1rem;margin-bottom:.7rem;background:var(--bg-2);
+  }
+  .car-row img{width:64px;height:48px;object-fit:cover;border-radius:6px;background:#000;flex-shrink:0;}
+  .car-row .info{flex:1;min-width:0;}
+  .car-row .info b{display:block;font-size:.95rem;}
+  .car-row .info span{font-size:.8rem;color:var(--text-muted);}
+  .car-row .actions{display:flex;gap:.5rem;flex-shrink:0;}
+  .inactive{opacity:.45;}
+  .thumb-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+  .thumb-list .t{position:relative;width:72px;height:52px;border-radius:6px;overflow:hidden;border:1px solid var(--border-2);}
+  .thumb-list .t img{width:100%;height:100%;object-fit:cover;}
+  .thumb-list .t button{
+    position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);color:#fff;
+    width:18px;height:18px;border-radius:50%;padding:0;font-size:.65rem;line-height:1;
+  }
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+  .msg{font-size:.85rem;margin:.5rem 0;}
+  .msg.ok{color:#6fcf97;}
+  .msg.err{color:#e06666;}
+  #formPanel{display:none;margin-top:1.5rem;}
+  .checkbox-row{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;}
+  .checkbox-row input{width:auto;margin:0;}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="wrap" id="loginView">
+  <div class="card login-box">
+    <h1 style="margin-bottom:1.25rem;">GEOSTAR Admin</h1>
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="admin@geostar.dz" />
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="••••••••" />
+    <button class="btn-primary" id="loginBtn" style="width:100%;">Sign In</button>
+    <p class="msg err" id="loginMsg"></p>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div class="wrap" id="dashView" style="display:none;">
+  <div class="topbar">
+    <h1>GEOSTAR — Manage Cars</h1>
+    <button class="btn-ghost" id="logoutBtn">Sign Out</button>
+  </div>
+
+  <button class="btn-primary" id="newCarBtn">+ Add New Car</button>
+  <p class="msg" id="dashMsg"></p>
+
+  <h2>Catalogue</h2>
+  <div id="carList"></div>
+
+  <!-- ===== ADD / EDIT FORM ===== -->
+  <div class="card" id="formPanel">
+    <h2 id="formTitle" style="margin-top:0;">Add Car</h2>
+    <input type="hidden" id="carId" />
+
+    <div class="row">
+      <div><label>Brand</label><input id="fBrand" placeholder="MG" /></div>
+      <div><label>Model / Name</label><input id="fName" placeholder="MG 5" /></div>
+    </div>
+
+    <div class="row3">
+      <div><label>Price (DZD, numbers only)</label><input id="fPrice" type="number" placeholder="2600000" /></div>
+      <div><label>Category</label>
+        <select id="fCategory">
+          <option value="sedan">Sedan</option>
+          <option value="suv">SUV</option>
+          <option value="hatchback">Hatchback</option>
+        </select>
+      </div>
+      <div><label>Badge (optional)</label><input id="fBadge" placeholder="Best Seller" /></div>
+    </div>
+
+    <label>Description</label>
+    <textarea id="fDescription" placeholder="Short description shown on the card and detail page"></textarea>
+
+    <h2>Specifications</h2>
+    <div class="row3">
+      <div><label>Engine</label><input id="specEngine" placeholder="1.5 — 120 hp" /></div>
+      <div><label>Transmission</label><input id="specTransmission" placeholder="7-speed DSG" /></div>
+      <div><label>Fuel Type</label><input id="specFuel" placeholder="Petrol" /></div>
+    </div>
+    <div class="row3">
+      <div><label>0–100 km/h</label><input id="specAccel" placeholder="9.5 seconds" /></div>
+      <div><label>Top Speed</label><input id="specTop" placeholder="195 km/h" /></div>
+      <div><label>Fuel Economy</label><input id="specEco" placeholder="6.1 L/100km" /></div>
+    </div>
+
+    <label>Key Features (one per line)</label>
+    <textarea id="fFeatures" placeholder="LED Matrix Headlights&#10;Adaptive Cruise Control&#10;Wireless CarPlay"></textarea>
+
+    <h2>Photos</h2>
+    <div class="thumb-list" id="imageThumbs"></div>
+    <input type="file" id="fImages" accept="image/*" multiple />
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="fActive" checked />
+      <label style="margin:0;">Visible on the website</label>
+    </div>
+
+    <div class="row">
+      <div><label>Display order (lower = shown first)</label><input id="fSortOrder" type="number" value="0" /></div>
+    </div>
+
+    <div style="display:flex;gap:.75rem;margin-top:.5rem;">
+      <button class="btn-primary" id="saveCarBtn">Save Car</button>
+      <button class="btn-ghost" id="cancelFormBtn">Cancel</button>
+    </div>
+    <p class="msg" id="formMsg"></p>
+  </div>
+</div>
+
+<script>
+/* ── Config — fill in from Supabase Dashboard → Project Settings → API ── */
+var SUPABASE_URL      = 'YOUR_SUPABASE_URL';
+var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+var currentImages = []; // image URLs attached to the car currently being edited
+
+/* ── Auth ─────────────────────────────────────────────────── */
+async function checkSession() {
+  var { data } = await supabaseClient.auth.getSession();
+  if (data.session) { showDashboard(); } else { showLogin(); }
+}
+
+function showLogin() {
+  document.getElementById('loginView').style.display = 'block';
+  document.getElementById('dashView').style.display = 'none';
+}
+function showDashboard() {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('dashView').style.display = 'block';
+  loadCarList();
+}
+
+document.getElementById('loginBtn').addEventListener('click', async function () {
+  var email = document.getElementById('loginEmail').value.trim();
+  var pass  = document.getElementById('loginPassword').value;
+  var msg   = document.getElementById('loginMsg');
+  msg.textContent = '';
+  var { error } = await supabaseClient.auth.signInWithPassword({ email: email, password: pass });
+  if (error) { msg.textContent = error.message; return; }
+  showDashboard();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async function () {
+  await supabaseClient.auth.signOut();
+  showLogin();
+});
+
+/* ── Car list ─────────────────────────────────────────────── */
+async function loadCarList() {
+  var list = document.getElementById('carList');
+  var dashMsg = document.getElementById('dashMsg');
+  list.innerHTML = 'Loading…';
+  var { data, error } = await supabaseClient
+    .from('cars')
+    .select('*')
+    .order('sort_order', { ascending: true });
+
+  if (error) { dashMsg.className = 'msg err'; dashMsg.textContent = error.message; list.innerHTML = ''; return; }
+  dashMsg.textContent = '';
+
+  if (!data.length) { list.innerHTML = '<p style="color:var(--text-muted)">No cars yet — add your first one above.</p>'; return; }
+
+  list.innerHTML = data.map(function (car) {
+    var img = (car.images && car.images[0]) ? car.images[0] : '';
+    return '<div class="car-row' + (car.is_active ? '' : ' inactive') + '">'
+      + '<img src="' + img + '" onerror="this.style.opacity=0" />'
+      + '<div class="info"><b>' + car.brand + ' ' + car.name + '</b>'
+      + '<span>' + Number(car.price_dzd).toLocaleString('en-US') + ' DZD'
+      + (car.is_active ? '' : ' · hidden') + '</span></div>'
+      + '<div class="actions">'
+      + '<button class="btn-ghost" data-edit="' + car.id + '">Edit</button>'
+      + '<button class="btn-danger" data-delete="' + car.id + '">Delete</button>'
+      + '</div></div>';
+  }).join('');
+
+  list.querySelectorAll('[data-edit]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var car = data.find(function (c) { return c.id === parseInt(btn.getAttribute('data-edit')); });
+      openForm(car);
+    });
+  });
+  list.querySelectorAll('[data-delete]').forEach(function (btn) {
+    btn.addEventListener('click', async function () {
+      if (!confirm('Delete this car permanently?')) return;
+      var id = parseInt(btn.getAttribute('data-delete'));
+      var { error } = await supabaseClient.from('cars').delete().eq('id', id);
+      if (error) { alert(error.message); return; }
+      loadCarList();
+    });
+  });
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+function openForm(car) {
+  document.getElementById('formPanel').style.display = 'block';
+  document.getElementById('formTitle').textContent = car ? 'Edit Car' : 'Add Car';
+  document.getElementById('carId').value = car ? car.id : '';
+  document.getElementById('fBrand').value = car ? car.brand : '';
+  document.getElementById('fName').value = car ? car.name : '';
+  document.getElementById('fPrice').value = car ? car.price_dzd : '';
+  document.getElementById('fCategory').value = car ? car.category : 'suv';
+  document.getElementById('fBadge').value = car ? (car.badge || '') : '';
+  document.getElementById('fDescription').value = car ? (car.description || '') : '';
+  var s = car ? (car.specs || {}) : {};
+  document.getElementById('specEngine').value = s['Engine'] || '';
+  document.getElementById('specTransmission').value = s['Transmission'] || '';
+  document.getElementById('specFuel').value = s['Fuel Type'] || '';
+  document.getElementById('specAccel').value = s['0–100 km/h'] || '';
+  document.getElementById('specTop').value = s['Top Speed'] || '';
+  document.getElementById('specEco').value = s['Fuel Eco'] || '';
+  document.getElementById('fFeatures').value = car ? (car.features || []).join('\n') : '';
+  document.getElementById('fActive').checked = car ? car.is_active : true;
+  document.getElementById('fSortOrder').value = car ? car.sort_order : 0;
+  currentImages = car ? (car.images || []).slice() : [];
+  renderThumbs();
+  document.getElementById('formMsg').textContent = '';
+  document.getElementById('formPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderThumbs() {
+  var wrap = document.getElementById('imageThumbs');
+  wrap.innerHTML = currentImages.map(function (url, i) {
+    return '<div class="t"><img src="' + url + '" /><button data-remove="' + i + '">✕</button></div>';
+  }).join('');
+  wrap.querySelectorAll('[data-remove]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentImages.splice(parseInt(btn.getAttribute('data-remove')), 1);
+      renderThumbs();
+    });
+  });
+}
+
+document.getElementById('newCarBtn').addEventListener('click', function () { openForm(null); });
+document.getElementById('cancelFormBtn').addEventListener('click', function () {
+  document.getElementById('formPanel').style.display = 'none';
+});
+
+/* Upload newly-picked photos to Supabase Storage as soon as they're chosen */
+document.getElementById('fImages').addEventListener('change', async function (e) {
+  var files = Array.from(e.target.files || []);
+  var formMsg = document.getElementById('formMsg');
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var path = Date.now() + '-' + Math.random().toString(36).slice(2) + '-' + file.name;
+    formMsg.className = 'msg';
+    formMsg.textContent = 'Uploading ' + file.name + '…';
+    var { error } = await supabaseClient.storage.from('car-images').upload(path, file);
+    if (error) { formMsg.className = 'msg err'; formMsg.textContent = error.message; continue; }
+    var { data } = supabaseClient.storage.from('car-images').getPublicUrl(path);
+    currentImages.push(data.publicUrl);
+  }
+  formMsg.textContent = '';
+  e.target.value = '';
+  renderThumbs();
+});
+
+document.getElementById('saveCarBtn').addEventListener('click', async function () {
+  var formMsg = document.getElementById('formMsg');
+  var id = document.getElementById('carId').value;
+  var brand = document.getElementById('fBrand').value.trim();
+  var name = document.getElementById('fName').value.trim();
+  var price = parseFloat(document.getElementById('fPrice').value);
+
+  if (!brand || !name || isNaN(price)) {
+    formMsg.className = 'msg err';
+    formMsg.textContent = 'Brand, model name and price are required.';
+    return;
+  }
+
+  var payload = {
+    brand: brand,
+    name: name,
+    price_dzd: price,
+    category: document.getElementById('fCategory').value,
+    badge: document.getElementById('fBadge').value.trim() || null,
+    description: document.getElementById('fDescription').value.trim(),
+    images: currentImages,
+    specs: {
+      'Engine': document.getElementById('specEngine').value.trim(),
+      'Transmission': document.getElementById('specTransmission').value.trim(),
+      'Fuel Type': document.getElementById('specFuel').value.trim(),
+      '0–100 km/h': document.getElementById('specAccel').value.trim(),
+      'Top Speed': document.getElementById('specTop').value.trim(),
+      'Fuel Eco': document.getElementById('specEco').value.trim()
+    },
+    features: document.getElementById('fFeatures').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean),
+    is_active: document.getElementById('fActive').checked,
+    sort_order: parseInt(document.getElementById('fSortOrder').value) || 0
+  };
+
+  var query;
+  if (id) {
+    query = supabaseClient.from('cars').update(payload).eq('id', id);
+  } else {
+    query = supabaseClient.from('cars').insert(payload);
+  }
+  var { error } = await query;
+  if (error) { formMsg.className = 'msg err'; formMsg.textContent = error.message; return; }
+
+  formMsg.className = 'msg ok';
+  formMsg.textContent = 'Saved.';
+  document.getElementById('formPanel').style.display = 'none';
+  loadCarList();
+});
+
+checkSession();
+</script>
+</body>
+</html>
