@@ -4,8 +4,8 @@
 
 /* ── Supabase config ───────────────────────────────────────── */
 /* Fill these in from Supabase Dashboard → Project Settings → API */
-var SUPABASE_URL      = 'YOUR_SUPABASE_URL';
-var SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+var SUPABASE_URL      = 'https://lprkiibktgcsmrkuvehl.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_zad6VjZlJ6JCJS-QjwIYcQ_GUQQFPQO';
 var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 var TRANSLATIONS = {
